@@ -8,5 +8,9 @@ import androidx.lifecycle.AndroidViewModel
 class TSViewModel(application: Application): AndroidViewModel(application){
 
     var showtext: MutableState<String> = mutableStateOf("TS")
+    var db:IRepository= DatabaseHelper(application)
+    //var ListCalcDB :ListCalc=ListCalcDBRF(showtext,db)
+
+    fun onAction() { }
 
 }
