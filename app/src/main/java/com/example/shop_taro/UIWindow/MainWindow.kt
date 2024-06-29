@@ -55,15 +55,14 @@ sealed class NavRoutes(val route: String) {
     object Profile : NavRoutes("profile")
 }
 @Composable
-fun MainWnd(viewModel: TSViewModel, navController: NavController) {
+fun MainWnd(viewModel: TSViewModel, MainNavController: NavController) {
     val navController = rememberNavController()
     Column() {
         NavHost(navController, startDestination = NavRoutes.Products.route, modifier = Modifier.weight(1f)) {
             composable(NavRoutes.Products.route) { Products() }
             composable(NavRoutes.Cart.route) { Cart()  }
             composable(NavRoutes.Orders.route) { Orders() }
-            composable(NavRoutes.Profile.route) { Profile(viewModel,navController) }
-
+            composable(NavRoutes.Profile.route) { Profile(viewModel,MainNavController) }
         }
         BottomNavigationBar(navController = navController)
     }

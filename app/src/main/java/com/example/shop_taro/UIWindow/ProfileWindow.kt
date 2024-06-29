@@ -62,7 +62,7 @@ fun Profile(viewModel: TSViewModel, navController: NavController) {
                     .edit()
                     .putBoolean("isLoggedIn", false)
                     .apply()
-
+                navController.navigate(Screens.StartWnd.route)
             },
             modifier = Modifier
                 .fillMaxWidth()
