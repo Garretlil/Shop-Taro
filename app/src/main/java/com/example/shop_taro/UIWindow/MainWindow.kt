@@ -28,6 +28,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -61,7 +62,7 @@ fun MainWnd(viewModel: TSViewModel, navController: NavController) {
             composable(NavRoutes.Products.route) { Products() }
             composable(NavRoutes.Cart.route) { Cart()  }
             composable(NavRoutes.Orders.route) { Orders() }
-            composable(NavRoutes.Profile.route) { Profile() }
+            composable(NavRoutes.Profile.route) { Profile(viewModel,navController) }
 
         }
         BottomNavigationBar(navController = navController)
@@ -146,11 +147,6 @@ fun Orders(){
         Text("Orders Page", fontSize = 30.sp)
     }
 }
-@Composable
-fun Profile(){
-    Column(Modifier.padding(20.dp)) {
-        Text("Profile Page", fontSize = 30.sp)
-    }
-}
+
 
 

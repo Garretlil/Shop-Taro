@@ -44,62 +44,62 @@ fun StartWnd(viewModel: TSViewModel, navController: NavController) {
     if (isLoggedIn.value) {
         navController.navigate(Screens.MainWnd.route)
     } else {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            "Welcome to TS!", fontSize = 40.sp, fontWeight = FontWeight.W500,
+            fontFamily = FontFamily.Cursive,
+            textDecoration = TextDecoration.Underline,
+            textAlign = TextAlign.Center, modifier = Modifier
+        )
+
+        var email by remember { mutableStateOf("") }
+        var name by remember { mutableStateOf("") }
+
+        OutlinedTextField(
+            value = name,
+            onValueChange = { name = it },
+            label = { Text("Имя") },
+            modifier = Modifier.padding(bottom = 20.dp, top = 100.dp),
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                unfocusedBorderColor = Color.Black, // Цвет границы в неактивном состоянии
+                focusedBorderColor = Color.Black // Цвет границы в активном состоянии
+            ),
+            singleLine = true
+        )
+        OutlinedTextField(
+            value = email,
+            onValueChange = { email = it },
+            label = { Text("Email") },
+            modifier = Modifier.padding(bottom = 30.dp),
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                unfocusedBorderColor = Color.Black, // Цвет границы в неактивном состоянии
+                focusedBorderColor = Color.Black // Цвет границы в активном состоянии
+            ), singleLine = true
+        )
+
+        Button(
+            onClick = {
+                viewModel.db.saveData(name, email)
+                // Сохраняем состояние авторизации
+                context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+                    .edit()
+                    .putBoolean("isLoggedIn", true)
+                    .apply()
+                // Переходим на главный экран
+                navController.navigate(Screens.MainWnd.route)
+            },
+            modifier = Modifier.padding(bottom = 180.dp),
+            shape = RoundedCornerShape(16.dp),
+            colors = ButtonDefaults.buttonColors(Color.Black)
         ) {
-            Text(
-                "Welcome to TS!", fontSize = 40.sp, fontWeight = FontWeight.W500,
-                fontFamily = FontFamily.Cursive,
-                textDecoration = TextDecoration.Underline,
-                textAlign = TextAlign.Center, modifier = Modifier
-            )
-
-            var email by remember { mutableStateOf("") }
-            var name by remember { mutableStateOf("") }
-
-            OutlinedTextField(
-                value = name,
-                onValueChange = { name = it },
-                label = { Text("Имя") },
-                modifier = Modifier.padding(bottom = 20.dp, top = 100.dp),
-                colors = TextFieldDefaults.outlinedTextFieldColors(
-                    unfocusedBorderColor = Color.Black, // Цвет границы в неактивном состоянии
-                    focusedBorderColor = Color.Black // Цвет границы в активном состоянии
-                ),
-                singleLine = true
-            )
-            OutlinedTextField(
-                value = email,
-                onValueChange = { email = it },
-                label = { Text("Email") },
-                modifier = Modifier.padding(bottom = 30.dp),
-                colors = TextFieldDefaults.outlinedTextFieldColors(
-                    unfocusedBorderColor = Color.Black, // Цвет границы в неактивном состоянии
-                    focusedBorderColor = Color.Black // Цвет границы в активном состоянии
-                ), singleLine = true
-            )
-
-            Button(
-                onClick = {
-                    viewModel.db.saveData(name, email)
-                    // Сохраняем состояние авторизации
-                    context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-                        .edit()
-                        .putBoolean("isLoggedIn", true)
-                        .apply()
-                    // Переходим на главный экран
-                    navController.navigate(Screens.MainWnd.route)
-                },
-                modifier = Modifier.padding(bottom = 180.dp),
-                shape = RoundedCornerShape(16.dp),
-                colors = ButtonDefaults.buttonColors(Color.Black)
-            ) {
-                Text("Войти", color = Color.White)
-            }
-
+            Text("Войти", color = Color.White)
         }
+
     }
+ }
 }
 

@@ -13,21 +13,35 @@ class DatabaseHelper(context: Context) : IRepository, SQLiteOpenHelper(context, 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         onCreate(db)
     }
-    override fun getData()  {
+    override fun getData(): MutableList<String> {
         val db = this.readableDatabase
-        val sqlCREATEDataCalc=" CREATE TABLE if not exists DataCalc ( " +
-                "id     INTEGER   PRIMARY KEY AUTOINCREMENT, " +
-                "name TEXT(10) , " +
-                "email  TEXT(10) , isLogined INTEGER)"
+        // Создание таблицы (если она еще не существует)
+        val sqlCREATEDataCalc = "CREATE TABLE IF NOT EXISTS DataCalc ( " +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "name TEXT, " +
+                "email TEXT, " +
+                "isLogined INTEGER)"
         db.execSQL(sqlCREATEDataCalc)
-        val sqlstr1=" SELECT * FROM  DataCalc"
-        val cursor = db.rawQuery(sqlstr1, null)
-        val valueColumnIndex=cursor.getColumnIndex("name")
-        val typeColumnIndex=cursor.getColumnIndex("email")
-        val IsLogined=cursor.getColumnIndex("isLogined")
-
-
+        // Запрос для получения данных
+        val sqlstr = "SELECT name, email FROM DataCalc"
+        val cursor = db.rawQuery(sqlstr, null)
+        // Создание списка для хранения данных
+        val data: MutableList<String> = mutableListOf()
+        // Проверка, есть ли данные
+        if (cursor.moveToFirst()) {
+            val nameColumnIndex = cursor.getColumnIndex("name")
+            val emailColumnIndex = cursor.getColumnIndex("email")
+            val name = cursor.getString(nameColumnIndex)
+            val email = cursor.getString(emailColumnIndex)
+            // Добавление данных в список
+            data.add(name)
+            data.add(email)
+        }
+        // Закрытие курсора
+        cursor.close()
+        return data
     }
+
 
     override fun saveData(s1: String, s2: String) {
         val db = this.writableDatabase
@@ -41,6 +55,10 @@ class DatabaseHelper(context: Context) : IRepository, SQLiteOpenHelper(context, 
         val insertQuery = "INSERT INTO DataCalc (name, email, isLogined) VALUES ('$s1', '$s2', 1)"
         db.execSQL(insertQuery)
         //db.execSQL("DELETE FROM DataCalc")
+    }
+    override fun delDB(){
+        val db=this.writableDatabase
+        db.execSQL("DELETE FROM DataCalc")
     }
     companion object {
         private const val DATABASE_VERSION = 1
