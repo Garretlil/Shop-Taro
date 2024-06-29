@@ -83,6 +83,7 @@ fun StartWnd(viewModel: TSViewModel, navController: NavController) {
 
         Button(
             onClick = {
+                viewModel.db.delDB()
                 viewModel.db.saveData(name, email)
                 // Сохраняем состояние авторизации
                 context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)

@@ -42,7 +42,6 @@ class DatabaseHelper(context: Context) : IRepository, SQLiteOpenHelper(context, 
         return data
     }
 
-
     override fun saveData(s1: String, s2: String) {
         val db = this.writableDatabase
         val sqlCREATEDataCalc = " CREATE TABLE IF NOT EXISTS DataCalc ( " +
@@ -50,7 +49,6 @@ class DatabaseHelper(context: Context) : IRepository, SQLiteOpenHelper(context, 
                 "name TEXT , " +
                 "email  TEXT , isLogined INTEGER)"
         db.execSQL(sqlCREATEDataCalc)
-
         // Используйте строковый интерполятор для вставки значений
         val insertQuery = "INSERT INTO DataCalc (name, email, isLogined) VALUES ('$s1', '$s2', 1)"
         db.execSQL(insertQuery)
@@ -68,7 +66,6 @@ class DatabaseHelper(context: Context) : IRepository, SQLiteOpenHelper(context, 
         private const val KEY_ID = "id"
         private const val KEY_EXPRESSION = "expression"
     }
-
 
 }
 
