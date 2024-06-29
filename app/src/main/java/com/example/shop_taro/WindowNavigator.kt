@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.shop_taro.UIWindow.MainWnd
 import com.example.shop_taro.UIWindow.StartWnd
+import com.example.shop_taro.UIWindow.TestWnd
 
 @Composable
 fun NavGraph (viewModel: TSViewModel,navController: NavHostController){
@@ -19,6 +20,9 @@ fun NavGraph (viewModel: TSViewModel,navController: NavHostController){
         }
         composable(route = Screens.MainWnd.route){
             MainWnd(viewModel,navController)
+        }
+        composable(route = Screens.TestWnd.route){
+            TestWnd()
         }
 
     }

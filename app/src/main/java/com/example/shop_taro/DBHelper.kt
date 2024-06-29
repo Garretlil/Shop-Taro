@@ -28,7 +28,7 @@ class DatabaseHelper(context: Context) : IRepository, SQLiteOpenHelper(context, 
         // Создание списка для хранения данных
         val data: MutableList<String> = mutableListOf()
         // Проверка, есть ли данные
-        if (cursor.moveToFirst()) {
+        if (cursor.moveToLast()) {
             val nameColumnIndex = cursor.getColumnIndex("name")
             val emailColumnIndex = cursor.getColumnIndex("email")
             val name = cursor.getString(nameColumnIndex)
