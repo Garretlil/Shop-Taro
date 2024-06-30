@@ -18,21 +18,32 @@ import androidx.compose.ui.unit.dp
     var name:String,
     var price:String,
     val imageResource:Int,
+     val id:Int
     )
 
 class ListCards() {
     private val listOfCards: MutableList<Card> = mutableListOf()
 
     init {
-        listOfCards.add(Card("Taro1", "10 000 ₽", R.drawable.taro))
-        listOfCards.add(Card("Taro2", "12 000 ₽", R.drawable.taro))
-        listOfCards.add(Card("Taro3", "13 000 ₽", R.drawable.taro))
-        listOfCards.add(Card("Taro4", "14 000 ₽", R.drawable.taro))
-        listOfCards.add(Card("Taro5", "15 000 ₽", R.drawable.taro))
+        listOfCards.add(Card("Taro1", "10 000 ₽", R.drawable.taro,1))
+        listOfCards.add(Card("Taro2", "12 000 ₽", R.drawable.taro,2))
+        listOfCards.add(Card("Taro3", "13 000 ₽", R.drawable.taro,3))
+        listOfCards.add(Card("Taro4", "14 000 ₽", R.drawable.taro,4))
+        listOfCards.add(Card("Taro5", "15 000 ₽", R.drawable.taro,5))
     }
-
-
     fun getListOfCards(): MutableList<Card> {
         return listOfCards
+    }
+}
+class Busket() {
+    private val listOfCards: MutableList<Card> = mutableListOf()
+    init{
+        val t=5
+    }
+    fun getListOfCards(): MutableList<Card> {
+        return listOfCards
+    }
+    fun adds(card:Card){
+        this.listOfCards.add(card)
     }
 }

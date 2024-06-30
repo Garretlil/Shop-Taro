@@ -12,6 +12,8 @@ class TSViewModel(application: Application): AndroidViewModel(application){
     //var ListCalcDB :ListCalc=ListCalcDBRF(showtext,db)
     var listcards = ListCards()
     val cards = listcards.getListOfCards()
+    val cart=Busket()
+    //val busket=cart.getListOfCards()
 
     fun onAction() { }
 

@@ -1,7 +1,5 @@
 package com.example.shop_taro.UIWindow
 
-import android.content.Context
-import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -13,7 +11,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,15 +20,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.shop_taro.Card
 import com.example.shop_taro.R
-import com.example.shop_taro.Screens
 import com.example.shop_taro.TSViewModel
 
 @Composable
-fun CardItem(card: Card,viewModel: TSViewModel) {
+fun CartItemForBusket(card: Card, viewModel: TSViewModel) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.padding(16.dp)
@@ -48,33 +43,15 @@ fun CardItem(card: Card,viewModel: TSViewModel) {
         Spacer(modifier = Modifier.height(8.dp))
         Text(text = card.name)
         Text(text = card.price)
-        Button(
-            onClick = {
-                //viewModel.db.delDB()
-                //val t=viewModel.db.check(name, email)
-//                if(t!=0){
-//                    context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-//                        .edit()
-//                        .putBoolean("isLoggedIn", true)
-//                        .apply()
-//                    navController.navigate(Screens.MainWnd.route)
-                  viewModel.cart.getListOfCards().add(card)
-//                }
-            },
-            shape = RoundedCornerShape(16.dp),
-            colors = ButtonDefaults.buttonColors(Color.Black)
-        ) {
-            Text("В корзину", color = Color.White)
-        }
     }
 }
 
 @Composable
-fun Products(viewModel: TSViewModel, MainNavController: NavController) {
+fun Cart(viewModel: TSViewModel, MainNavController: NavController) {
     LazyColumn {
-        for (i in 0..<viewModel.cards.count()) {
+        for (i in 0..<viewModel.cart.getListOfCards().count()) {
             item {
-                CardItem(viewModel.cards[i],viewModel)
+                CartItemForBusket(viewModel.cart.getListOfCards()[i],viewModel)
             }
         }
     }

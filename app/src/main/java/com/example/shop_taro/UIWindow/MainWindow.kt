@@ -77,7 +77,7 @@ fun MainWnd(viewModel: TSViewModel, MainNavController: NavController) {
     Column() {
         NavHost(navController, startDestination = NavRoutes.Products.route, modifier = Modifier.weight(1f)) {
             composable(NavRoutes.Products.route) { Products(viewModel,MainNavController) }
-            composable(NavRoutes.Cart.route)     { Cart() }
+            composable(NavRoutes.Cart.route)     { Cart(viewModel, MainNavController) }
             composable(NavRoutes.Orders.route)   { Orders() }
             composable(NavRoutes.Profile.route)  { Profile(viewModel,MainNavController) }
             composable(NavRoutes.Product.route)  { OneProduct(viewModel,MainNavController) }
@@ -146,13 +146,6 @@ data class BarItem(
     val route: String
 )
 
-@Composable
-fun Cart(){
-    Column(Modifier.padding(20.dp)) {
-        Text("Cart Page", fontSize = 30.sp)
-    }
-
-}
 @Composable
 fun Orders(){
     Column(Modifier.padding(20.dp)) {
