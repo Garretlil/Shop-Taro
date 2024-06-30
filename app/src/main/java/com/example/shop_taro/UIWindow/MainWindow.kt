@@ -76,11 +76,11 @@ fun MainWnd(viewModel: TSViewModel, MainNavController: NavController) {
     val navController = rememberNavController()
     Column() {
         NavHost(navController, startDestination = NavRoutes.Products.route, modifier = Modifier.weight(1f)) {
-            composable(NavRoutes.Products.route) { Products() }
-            composable(NavRoutes.Cart.route) { Cart()  }
-            composable(NavRoutes.Orders.route) { Orders() }
-            composable(NavRoutes.Profile.route) { Profile(viewModel,MainNavController) }
-            composable(NavRoutes.Product.route) { Product() }
+            composable(NavRoutes.Products.route) { Products(viewModel,MainNavController) }
+            composable(NavRoutes.Cart.route)     { Cart() }
+            composable(NavRoutes.Orders.route)   { Orders() }
+            composable(NavRoutes.Profile.route)  { Profile(viewModel,MainNavController) }
+            composable(NavRoutes.Product.route)  { OneProduct(viewModel,MainNavController) }
 
         }
         BottomNavigationBar(navController = navController)
@@ -145,51 +145,7 @@ data class BarItem(
     val image: ImageVector,
     val route: String
 )
-@Composable
-fun Products(){
-    Card(
-        colors = CardDefaults.cardColors(containerColor = Color.White),
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(IntrinsicSize.Min) // Высота соответствует содержимому
-            //.weight(1f) // Занимаем половину доступного пространства
-            //.padding(16.dp),
 
-
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                ,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text("Title", fontSize = 16.sp,fontWeight = FontWeight.Medium, modifier = Modifier.padding(top=27.dp))
-            Image(
-                painter = painterResource(id = R.drawable.taro),
-                contentScale = ContentScale.Fit,
-                contentDescription = "Profile Image",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(400.dp) // Устанавливаем высоту картинки
-                    .clip(RoundedCornerShape(16.dp)) // Добавляем закругление углов
-            )
-            Text("Taro cards",fontSize = 25.sp,fontWeight = FontWeight.Bold, modifier = Modifier.padding(top=16.dp))
-            Text("10 000 ₽",fontSize = 20.sp,fontWeight = FontWeight.Bold, modifier = Modifier.padding(top=8.dp))
-            Text("Body text for describing why this product is simply a must-buy",fontSize = 15.sp, modifier = Modifier.padding(top=10.dp), color = Color.Gray)
-            Button(
-                onClick = {},
-                modifier = Modifier
-                    .width(250.dp) // Устанавливаем ширину
-                    .height(60.dp).padding(top = 10.dp).fillMaxWidth(),
-                shape = RoundedCornerShape(16.dp),
-                colors = ButtonDefaults.buttonColors(Color.Black)
-            ) {
-                Text("Add to cart", color = Color.White)
-            }
-        }
-    }
-
-}
 @Composable
 fun Cart(){
     Column(Modifier.padding(20.dp)) {

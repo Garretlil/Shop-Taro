@@ -54,8 +54,24 @@ class DatabaseHelper(context: Context) : IRepository, SQLiteOpenHelper(context, 
         db.execSQL(insertQuery)
         //db.execSQL("DELETE FROM DataCalc")
     }
+    override fun check(name: String, email: String): Int {
+        val db = this.readableDatabase
+        val sqlCheck = "SELECT COUNT(*) AS count \n" +
+                "FROM DataCalc\n" +
+                "WHERE name ='$name'  AND email = '$email'"
+        val cursor = db.rawQuery(sqlCheck, null)
+
+        var countAccount = 0
+        if (cursor.moveToFirst()) {
+            val countColumnIndex = cursor.getColumnIndex("count")
+            countAccount = cursor.getInt(countColumnIndex)
+        }
+        cursor.close()
+        return countAccount
+    }
+
     override fun delDB(){
-        val db=this.writableDatabase
+        val db = this.writableDatabase
         db.execSQL("DELETE FROM DataCalc")
     }
     companion object {

@@ -21,38 +21,27 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.shop_taro.Screens
 import com.example.shop_taro.TSViewModel
 import com.example.shop_taro.ui.theme.BlueR
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StartWnd(viewModel: TSViewModel, navController: NavController) {
-    val context = LocalContext.current
-    val isLoggedIn = remember {
-        mutableStateOf(context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-            .getBoolean("isLoggedIn", false))
-    }
-
-    if (isLoggedIn.value) {
-        navController.navigate(Screens.MainWnd.route)
-    } else {
+fun LoginWnd(viewModel:TSViewModel, navController: NavHostController){
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            "Welcome to TS!", fontSize = 40.sp, fontWeight = FontWeight.W500,
+            "Log in", fontSize = 40.sp, fontWeight = FontWeight.W500,
             fontFamily = FontFamily.Cursive,
             textDecoration = TextDecoration.Underline,
             textAlign = TextAlign.Center, modifier = Modifier
@@ -86,39 +75,19 @@ fun StartWnd(viewModel: TSViewModel, navController: NavController) {
         Button(
             onClick = {
                 //viewModel.db.delDB()
-                val t=viewModel.db.check(name, email)
-                if(t!=0){
-                    context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-                        .edit()
-                        .putBoolean("isLoggedIn", true)
-                        .apply()
-                    navController.navigate(Screens.MainWnd.route)
-                }
+                viewModel.db.saveData(name, email)
+
+                navController.navigate(Screens.MainWnd.route)
             },
             modifier = Modifier.padding(bottom = 180.dp),
             shape = RoundedCornerShape(16.dp),
             colors = ButtonDefaults.buttonColors(Color.Black)
         ) {
-            Text("Войти", color = Color.White)
+            Text("Зарегестрироваться", color = Color.White)
         }
-        Text(
-            "Ещё нет аккаунта?", fontSize = 15.sp, fontWeight = FontWeight.W300,
-            //fontFamily = FontFamily.Cursive,
-            //textDecoration = TextDecoration.Underline,
-            textAlign = TextAlign.Center, modifier = Modifier.padding(bottom=50.dp)
-        )
-        Text(
-            "Регистрация", fontSize = 15.sp, fontWeight = FontWeight.W300,
-            //fontFamily = FontFamily.Cursive,
-            //textDecoration = TextDecoration.Underline,
-            textAlign = TextAlign.Center,color = BlueR,
-            modifier = Modifier.padding(bottom=50.dp)
-            .clickable { navController.navigate(Screens.LoginWnd.route) }
-
-        )
 
 
     }
- }
-}
 
+
+}
