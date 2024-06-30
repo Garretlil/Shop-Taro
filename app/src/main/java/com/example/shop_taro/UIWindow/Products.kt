@@ -3,6 +3,7 @@ package com.example.shop_taro.UIWindow
 import android.content.Context
 import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,13 +26,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.shop_taro.Card
 import com.example.shop_taro.R
 import com.example.shop_taro.Screens
 import com.example.shop_taro.TSViewModel
 
 @Composable
-fun CardItem(card: Card,viewModel: TSViewModel) {
+fun CardItem(card: Card,viewModel: TSViewModel,NavController: NavHostController) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.padding(16.dp)
@@ -46,18 +48,11 @@ fun CardItem(card: Card,viewModel: TSViewModel) {
                 .clip(RoundedCornerShape(16.dp)).size(150.dp) // Добавляем закругление углов
         )
         Spacer(modifier = Modifier.height(8.dp))
-        Text(text = card.name)
+        Text(text = card.name,modifier = Modifier.clickable { NavController.navigate(NavRoutes.Product.route) })
         Text(text = card.price)
         Button(
             onClick = {
-                //viewModel.db.delDB()
-                //val t=viewModel.db.check(name, email)
-//                if(t!=0){
-//                    context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-//                        .edit()
-//                        .putBoolean("isLoggedIn", true)
-//                        .apply()
-//                    navController.navigate(Screens.MainWnd.route)
+//                navController.navigate(Screens.MainWnd.route)
                   viewModel.cart.getListOfCards().add(card)
 //                }
             },
@@ -70,11 +65,11 @@ fun CardItem(card: Card,viewModel: TSViewModel) {
 }
 
 @Composable
-fun Products(viewModel: TSViewModel, MainNavController: NavController) {
+fun Products(viewModel: TSViewModel, NavController: NavHostController) {
     LazyColumn {
         for (i in 0..<viewModel.cards.count()) {
             item {
-                CardItem(viewModel.cards[i],viewModel)
+                CardItem(viewModel.cards[i],viewModel,NavController)
             }
         }
     }

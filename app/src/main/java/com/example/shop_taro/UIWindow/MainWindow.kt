@@ -76,11 +76,11 @@ fun MainWnd(viewModel: TSViewModel, MainNavController: NavController) {
     val navController = rememberNavController()
     Column() {
         NavHost(navController, startDestination = NavRoutes.Products.route, modifier = Modifier.weight(1f)) {
-            composable(NavRoutes.Products.route) { Products(viewModel,MainNavController) }
-            composable(NavRoutes.Cart.route)     { Cart(viewModel, MainNavController) }
+            composable(NavRoutes.Products.route) { Products(viewModel,navController) }
+            composable(NavRoutes.Cart.route)     { Cart(viewModel, navController) }
             composable(NavRoutes.Orders.route)   { Orders() }
             composable(NavRoutes.Profile.route)  { Profile(viewModel,MainNavController) }
-            composable(NavRoutes.Product.route)  { OneProduct(viewModel,MainNavController) }
+            composable(NavRoutes.Product.route)  { OneProduct(viewModel,navController) }
 
         }
         BottomNavigationBar(navController = navController)

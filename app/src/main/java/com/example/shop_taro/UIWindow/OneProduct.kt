@@ -24,11 +24,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.shop_taro.R
 import com.example.shop_taro.TSViewModel
 
 @Composable
-fun OneProduct(viewModel:TSViewModel,MainNavController: NavController){
+fun OneProduct(viewModel:TSViewModel,MainNavController: NavHostController){
     Card(
         colors = CardDefaults.cardColors(containerColor = Color.White),
         modifier = Modifier
