@@ -85,15 +85,15 @@ fun StartWnd(viewModel: TSViewModel, navController: NavController) {
 
         Button(
             onClick = {
-                //viewModel.db.delDB()
-                val t=viewModel.db.check(name, email)
-                if(t!=0){
-                    context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-                        .edit()
-                        .putBoolean("isLoggedIn", true)
-                        .apply()
-                    navController.navigate(Screens.MainWnd.route)
-                }
+                viewModel.db.delDB()
+                //val t=viewModel.db.check(name, email)
+                viewModel.db.saveData(name, email)
+                context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+                    .edit()
+                    .putBoolean("isLoggedIn", true)
+                    .apply()
+                navController.navigate(Screens.MainWnd.route)
+
             },
             modifier = Modifier.padding(bottom = 180.dp),
             shape = RoundedCornerShape(16.dp),
@@ -101,21 +101,21 @@ fun StartWnd(viewModel: TSViewModel, navController: NavController) {
         ) {
             Text("Войти", color = Color.White)
         }
-        Text(
-            "Ещё нет аккаунта?", fontSize = 15.sp, fontWeight = FontWeight.W300,
-            //fontFamily = FontFamily.Cursive,
-            //textDecoration = TextDecoration.Underline,
-            textAlign = TextAlign.Center, modifier = Modifier.padding(bottom=50.dp)
-        )
-        Text(
-            "Регистрация", fontSize = 15.sp, fontWeight = FontWeight.W300,
-            //fontFamily = FontFamily.Cursive,
-            //textDecoration = TextDecoration.Underline,
-            textAlign = TextAlign.Center,color = BlueR,
-            modifier = Modifier.padding(bottom=50.dp)
-            .clickable { navController.navigate(Screens.LoginWnd.route) }
-
-        )
+//        Text(
+//            "Ещё нет аккаунта?", fontSize = 15.sp, fontWeight = FontWeight.W300,
+//            //fontFamily = FontFamily.Cursive,
+//            //textDecoration = TextDecoration.Underline,
+//            textAlign = TextAlign.Center, modifier = Modifier.padding(bottom=50.dp)
+//        )
+//        Text(
+//            "Регистрация", fontSize = 15.sp, fontWeight = FontWeight.W300,
+//            //fontFamily = FontFamily.Cursive,
+//            //textDecoration = TextDecoration.Underline,
+//            textAlign = TextAlign.Center,color = BlueR,
+//            modifier = Modifier.padding(bottom=50.dp)
+//            .clickable { navController.navigate(Screens.LoginWnd.route) }
+//
+//        )
 
 
     }

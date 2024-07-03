@@ -52,6 +52,14 @@ fun Profile(viewModel: TSViewModel, navController: NavController) {
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(40.dp)
         )
+        Text(text = "email:         "+viewModel.db.getData()[1],
+            fontSize = 20.sp,
+            fontWeight = FontWeight.W300,
+            modifier = Modifier.padding(40.dp))
+        Text(text = "Телефон:         "+"+7(916)-827-31-03",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.W300,
+            modifier = Modifier.padding(40.dp))
 
         Spacer(modifier = Modifier.weight(1f))
 
