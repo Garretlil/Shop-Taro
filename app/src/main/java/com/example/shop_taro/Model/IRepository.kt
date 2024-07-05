@@ -1,4 +1,4 @@
-package com.example.shop_taro
+package com.example.shop_taro.Model
 
 
 interface IRepository {

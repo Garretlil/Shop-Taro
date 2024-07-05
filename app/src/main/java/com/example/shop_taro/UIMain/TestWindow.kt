@@ -1,4 +1,4 @@
-package com.example.shop_taro.UIWindow
+package com.example.shop_taro.UIMain
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

@@ -1,4 +1,4 @@
-package com.example.shop_taro
+package com.example.shop_taro.Model
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -60,9 +60,8 @@ class DatabaseHelper(context: Context) : IRepository, SQLiteOpenHelper(context, 
                 "FROM DataCalc\n" +
                 "WHERE name ='$name'  AND email = '$email'"
         val cursor = db.rawQuery(sqlCheck, null)
-
         var countAccount = 0
-        if (cursor.moveToFirst()) {
+        if (cursor.moveToLast()) {
             val countColumnIndex = cursor.getColumnIndex("count")
             countAccount = cursor.getInt(countColumnIndex)
         }

@@ -1,7 +1,5 @@
-package com.example.shop_taro.UIWindow
+package com.example.shop_taro.UIMain
 
-import android.content.Context
-import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -12,28 +10,21 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
-import com.example.shop_taro.Card
+import com.example.shop_taro.Model.Product
 import com.example.shop_taro.R
-import com.example.shop_taro.Screens
-import com.example.shop_taro.TSViewModel
+import com.example.shop_taro.ViewModels.TSViewModel
 
 @Composable
-fun CardItem(card: Card,viewModel: TSViewModel,NavController: NavHostController) {
+fun CartItemForBucket(card: Product?, viewModel: TSViewModel, NavController: NavHostController) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.padding(16.dp)
@@ -48,28 +39,19 @@ fun CardItem(card: Card,viewModel: TSViewModel,NavController: NavHostController)
                 .clip(RoundedCornerShape(16.dp)).size(150.dp) // Добавляем закругление углов
         )
         Spacer(modifier = Modifier.height(8.dp))
-        Text(text = card.name,modifier = Modifier.clickable { NavController.navigate(NavRoutes.Product.route) })
-        Text(text = card.price)
-        Button(
-            onClick = {
-//                navController.navigate(Screens.MainWnd.route)
-                  viewModel.cart.getListOfCards().add(card)
-//                }
-            },
-            shape = RoundedCornerShape(16.dp),
-            colors = ButtonDefaults.buttonColors(Color.Black)
-        ) {
-            Text("В корзину", color = Color.White)
+        if (card != null) {
+            Text(text = card.name,modifier = Modifier.clickable { NavController.navigate(NavRoutes.Product.route) })
+            Text(text = card.price)
         }
     }
 }
 
 @Composable
-fun Products(viewModel: TSViewModel, NavController: NavHostController) {
+fun Cart(viewModel: TSViewModel, MainNavController: NavHostController) {
     LazyColumn {
-        for (i in 0..<viewModel.cards.count()) {
+        for (i in 0..<viewModel.cart.getListOfProducts().count()) {
             item {
-                CardItem(viewModel.cards[i],viewModel,NavController)
+                CartItemForBucket(viewModel.cart.getListOfProducts()[i],viewModel,MainNavController)
             }
         }
     }

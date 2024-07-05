@@ -1,4 +1,4 @@
-package com.example.shop_taro.UIWindow
+package com.example.shop_taro.UIMain
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -21,21 +21,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
-import com.example.shop_taro.Card
+import com.example.shop_taro.Model.Product
 import com.example.shop_taro.R
-import com.example.shop_taro.Screens
-import com.example.shop_taro.TSViewModel
+import com.example.shop_taro.ViewModels.TSViewModel
 
 @Composable
-fun CartItemForBusket(card: Card, viewModel: TSViewModel,NavController: NavHostController) {
+fun CardItem(product: Product?, viewModel: TSViewModel, NavController: NavHostController) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.padding(16.dp)
     ) {
         Image(
-
             painter = painterResource(id = R.drawable.taro),
             contentScale = ContentScale.Fit,
             contentDescription = "Profile Image",
@@ -45,17 +42,30 @@ fun CartItemForBusket(card: Card, viewModel: TSViewModel,NavController: NavHostC
                 .clip(RoundedCornerShape(16.dp)).size(150.dp) // Добавляем закругление углов
         )
         Spacer(modifier = Modifier.height(8.dp))
-        Text(text = card.name,modifier = Modifier.clickable { NavController.navigate(NavRoutes.Product.route) })
-        Text(text = card.price)
+        if (product != null) {
+            Text(text = product.name,modifier = Modifier.clickable {
+                viewModel.updateCurrentProduct(product)
+                NavController.navigate(NavRoutes.Product.route) })
+            Text(text = product.price)
+        }
+        Button(
+            onClick = {
+                  viewModel.addToCart(product)
+            },
+            shape = RoundedCornerShape(16.dp),
+            colors = ButtonDefaults.buttonColors(Color.Black)
+        ) {
+            Text("В корзину", color = Color.White)
+        }
     }
 }
 
 @Composable
-fun Cart(viewModel: TSViewModel, MainNavController: NavHostController) {
+fun Products(viewModel: TSViewModel, NavController: NavHostController) {
     LazyColumn {
-        for (i in 0..<viewModel.cart.getListOfCards().count()) {
+        for (i in 0..<viewModel.catalog.getAllProducts().count()) {
             item {
-                CartItemForBusket(viewModel.cart.getListOfCards()[i],viewModel,MainNavController)
+                CardItem(viewModel.catalog.getAllProducts()[i],viewModel,NavController)
             }
         }
     }

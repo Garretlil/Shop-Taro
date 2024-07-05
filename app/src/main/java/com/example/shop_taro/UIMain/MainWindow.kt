@@ -1,56 +1,23 @@
-package com.example.shop_taro.UIWindow
+package com.example.shop_taro.UIMain
 
-import android.content.Context
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 
-import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowBack
-import androidx.compose.material.icons.filled.Face
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.material.icons.rounded.ArrowBack
-import androidx.compose.material3.BottomAppBarDefaults.containerColor
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
-import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -59,9 +26,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.shop_taro.R
-import com.example.shop_taro.Screens
-import com.example.shop_taro.TSViewModel
+import com.example.shop_taro.ViewModels.TSViewModel
 import com.example.shop_taro.ui.theme.IconColor
 
 sealed class NavRoutes(val route: String) {
@@ -80,7 +45,7 @@ fun MainWnd(viewModel: TSViewModel, MainNavController: NavController) {
             composable(NavRoutes.Cart.route)     { Cart(viewModel, navController) }
             composable(NavRoutes.Orders.route)   { Orders() }
             composable(NavRoutes.Profile.route)  { Profile(viewModel,MainNavController) }
-            composable(NavRoutes.Product.route)  { OneProduct(viewModel,navController) }
+            composable(NavRoutes.Product.route)  { OneProduct(viewModel.currentProduct,viewModel,navController) }
 
         }
         BottomNavigationBar(navController = navController)
@@ -152,24 +117,7 @@ fun Orders(){
         Text("Orders Page", fontSize = 30.sp)
     }
 }
-@Composable
-fun Product(){
-    OutlinedCard(
-    colors = CardDefaults.cardColors(
-    containerColor = MaterialTheme.colorScheme.surface,
-    ),
-    border = BorderStroke(1.dp, Color.Black),
-    modifier = Modifier
-    .size(width = 240.dp, height = 100.dp)
-    ) {
-        Text(
-            text = "Outlined",
-            modifier = Modifier
-                .padding(16.dp),
-            textAlign = TextAlign.Center,
-        )
-    }
-}
+
 
 
 
