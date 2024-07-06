@@ -74,6 +74,8 @@ fun AuthWnd(viewModel: TSViewModel, navController: NavHostController){
             onClick = {
                 //viewModel.db.delDB()
                 viewModel.onAuth(name,email)
+                viewModel.updateUserName(name)
+                viewModel.updateUserEmail(email)
                 navController.navigate(Screens.MainWnd.route)
             },
             modifier = Modifier.padding(bottom = 180.dp),

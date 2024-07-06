@@ -24,7 +24,7 @@ import com.example.shop_taro.R
 import com.example.shop_taro.ViewModels.TSViewModel
 
 @Composable
-fun CartItemForBucket(card: Product?, viewModel: TSViewModel, NavController: NavHostController) {
+fun CartItemForBucket(product: Product?, viewModel: TSViewModel, NavController: NavHostController) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.padding(16.dp)
@@ -35,13 +35,17 @@ fun CartItemForBucket(card: Product?, viewModel: TSViewModel, NavController: Nav
             contentDescription = "Profile Image",
             modifier = Modifier
                 .fillMaxWidth()
-                .height(400.dp) // Устанавливаем высоту картинки
-                .clip(RoundedCornerShape(16.dp)).size(150.dp) // Добавляем закругление углов
+                .height(400.dp)
+                .clip(RoundedCornerShape(16.dp)).size(150.dp)
         )
         Spacer(modifier = Modifier.height(8.dp))
-        if (card != null) {
-            Text(text = card.name,modifier = Modifier.clickable { NavController.navigate(NavRoutes.Product.route) })
-            Text(text = card.price)
+        if (product != null) {
+            Text(text = product.name,
+                modifier = Modifier.clickable {
+                    viewModel.updateCurrentProduct(product)
+                    NavController.navigate(NavRoutes.Product.route)
+                })
+            Text(text = product.price)
         }
     }
 }
@@ -49,9 +53,9 @@ fun CartItemForBucket(card: Product?, viewModel: TSViewModel, NavController: Nav
 @Composable
 fun Cart(viewModel: TSViewModel, MainNavController: NavHostController) {
     LazyColumn {
-        for (i in 0..<viewModel.cart.getListOfProducts().count()) {
+        for (i in 0..<viewModel.catalog.cart.getListOfProductsFromCart().count()) {
             item {
-                CartItemForBucket(viewModel.cart.getListOfProducts()[i],viewModel,MainNavController)
+                CartItemForBucket(viewModel.catalog.cart.getListOfProductsFromCart()[i],viewModel,MainNavController)
             }
         }
     }

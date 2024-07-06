@@ -1,5 +1,6 @@
 package com.example.shop_taro.Model
 
+import com.example.shop_taro.ViewModels.TSViewModel
 
 
 class Login (db_:IRepository){

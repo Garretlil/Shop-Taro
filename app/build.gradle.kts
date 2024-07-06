@@ -2,7 +2,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-
+    id("kotlin-kapt")
 
 }
 
@@ -52,10 +52,15 @@ android {
         }
     }
 }
+val daggerVersion = "2.51.1"
+val dagger = "com.google.dagger:dagger:$daggerVersion"
+val daggerCompiler = "com.google.dagger:dagger-compiler:$daggerVersion"
 
 dependencies {
-
-
+    // ...
+    // Dagger
+    implementation(dagger)
+    kapt(daggerCompiler)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

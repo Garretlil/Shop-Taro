@@ -36,14 +36,14 @@ fun Profile(viewModel: TSViewModel, navController: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = viewModel.db.getData()[0],
+            text = viewModel.profile.name,
             fontSize = 40.sp,
             fontWeight = FontWeight.W500,
             fontFamily = FontFamily.Cursive,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(40.dp)
         )
-        Text(text = "email:         "+viewModel.db.getData()[1],
+        Text(text = "email:         "+viewModel.profile.email,
             fontSize = 20.sp,
             fontWeight = FontWeight.W300,
             modifier = Modifier.padding(40.dp))
