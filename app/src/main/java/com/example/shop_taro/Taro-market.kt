@@ -4,9 +4,7 @@ import android.app.Application
 import com.example.shop_taro.Model.dagger.CatalogComponent
 import com.example.shop_taro.Model.dagger.DaggerCatalogComponent
 
-/**
- * Не забудьте указать MainApp в AndroidManifest вашего приложения
- */
+
 class Taro_market: Application() {
 
     private lateinit var catalogComponent: CatalogComponent
