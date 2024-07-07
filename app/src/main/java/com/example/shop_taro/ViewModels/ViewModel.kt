@@ -14,19 +14,17 @@ import com.example.shop_taro.Model.Product
 import com.example.shop_taro.Model.Profile
 import com.example.shop_taro.Model.dagger.CatalogComponent
 import com.example.shop_taro.Model.dagger.DaggerCatalogComponent
+import com.example.shop_taro.Taro_market
 
 
 class TSViewModel(application: Application): AndroidViewModel(application){
 
     var db: IRepository = DatabaseHelper(application)
-
+    val catalog: Catalog = (application as Taro_market).getCatalogComponent().catalog
     private var login:Login=Login(db)
     private var auth:Auth=Auth(db)
-
     //var cart:Cart=Cart()
-    var catalogComponent: CatalogComponent? =DaggerCatalogComponent.create()
-    val catalog: Catalog
-        get() = catalogComponent!!.catalog
+    //var catalog:Catalog=Catalog(cart)
     var currentProduct: Product?=null
     var profile:Profile=Profile(db)
 

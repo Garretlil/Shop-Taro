@@ -1,5 +1,6 @@
 package com.example.shop_taro.Model
 import com.example.shop_taro.R
+import javax.inject.Singleton
 
 data class Product(
     var name:String,
@@ -7,7 +8,7 @@ data class Product(
     val imageResource:Int,
     val id:Int
     )
-
+@Singleton
 class Catalog(var cart:Cart) {
     private val listOfProducts: MutableList<Product> = mutableListOf()
     init{
