@@ -29,6 +29,8 @@ import androidx.navigation.NavHostController
 import com.example.shop_taro.Model.Auth
 import com.example.shop_taro.Screens
 import com.example.shop_taro.ViewModels.TSViewModel
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

@@ -54,7 +54,7 @@ class DatabaseHelper(context: Context) : IRepository, SQLiteOpenHelper(context, 
         db.execSQL(insertQuery)
         //db.execSQL("DELETE FROM DataCalc")
     }
-    override fun check(name: String, email: String): Int {
+    override fun checkLogin(name: String, email: String): Int {
         val db = this.readableDatabase
         val sqlCheck = "SELECT COUNT(*) AS count \n" +
                 "FROM DataCalc\n" +

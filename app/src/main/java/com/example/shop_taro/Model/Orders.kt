@@ -1,8 +1,10 @@
 package com.example.shop_taro.Model
 
+import javax.inject.Singleton
 
-enum class orderStatus{
-    ACCEPTED,DELIVERY,OBTAINED
+
+enum class orderStatus(status:String){
+    ACCEPTED("оформлен"),DELIVERY("доставка"),OBTAINED("получен")
 }
 
 data class Order( val idOrder:Int,
@@ -10,10 +12,12 @@ data class Order( val idOrder:Int,
                   var summa:Int,
                   var status:orderStatus
                )
-
+@Singleton
 class Orders(cart_:Cart) {
-    private val cart:Cart=cart_
+    private var productsInOrder: MutableList<Product?> = mutableListOf()
+    //private val catalog:Catalog=catalog_
     private val listOfOrders: MutableList<Order> = mutableListOf()
+    var cart:Cart=cart_
     init{
         getAllOrdersFromDB()
     }
@@ -21,14 +25,17 @@ class Orders(cart_:Cart) {
         return listOfOrders
     }
     fun getAllOrdersFromDB() {
-        this.listOfOrders.add(Order(1,products=cart.listOfProducts,10000,orderStatus.ACCEPTED))
-        this.listOfOrders.add(Order(2,products=cart.listOfProducts,21000 ,orderStatus.DELIVERY))
-        this.listOfOrders.add(Order(3,products=cart.listOfProducts,22000 ,orderStatus.DELIVERY))
-        this.listOfOrders.add(Order(4,products=cart.listOfProducts,23000,orderStatus.OBTAINED))
-        this.listOfOrders.add(Order(5,products=cart.listOfProducts,24000 ,orderStatus.OBTAINED))
+        //this.listOfOrders.add(Order(1,products=catalog.cart.listOfProducts,18000,orderStatus.ACCEPTED))
     }
-    fun showOrder(){
+    fun createOrder(){
+        var summa:Int=0
+        for (i in 0..<this.cart.listOfProducts.count()){
+            summa+=this.cart.listOfProducts[i]!!.price
+        }
+        val orderlist=this.cart.listOfProducts.toMutableList()
+        this.listOfOrders.add(Order(1,products=orderlist,summa,orderStatus.ACCEPTED))
+        this.cart.listOfProducts.clear()
+    }
 
-    }
 
 }

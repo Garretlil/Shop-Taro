@@ -46,7 +46,7 @@ fun CardItem(product: Product?, viewModel: TSViewModel, NavController: NavHostCo
             Text(text = product.name,modifier = Modifier.clickable {
                 viewModel.updateCurrentProduct(product)
                 NavController.navigate(NavRoutes.Product.route) })
-            Text(text = product.price)
+            Text(text = product.price.toString()+" ₽")
         }
         Button(
             onClick = {

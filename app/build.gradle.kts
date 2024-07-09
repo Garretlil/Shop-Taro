@@ -21,6 +21,10 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        kapt {
+            arguments {arg("room.schemaLocation", "$projectDir/schemas")}
+            correctErrorTypes= true
+        }
     }
 
     buildTypes {
@@ -57,10 +61,16 @@ val dagger = "com.google.dagger:dagger:$daggerVersion"
 val daggerCompiler = "com.google.dagger:dagger-compiler:$daggerVersion"
 
 dependencies {
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     // ...
     // Dagger
     implementation(dagger)
     kapt(daggerCompiler)
+
+    implementation ("androidx.room:room-runtime:2.6.1") // Библиотека "Room"
+    kapt ("androidx.room:room-compiler:2.6.1") // Кодогенератор
+    implementation ("androidx.room:room-ktx:2.6.1") // Дополнительно для Kotlin Coroutines, Kotlin Flows
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

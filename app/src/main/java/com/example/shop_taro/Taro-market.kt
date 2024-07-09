@@ -1,20 +1,30 @@
 package com.example.shop_taro
 
 import android.app.Application
-import com.example.shop_taro.Model.dagger.CatalogComponent
-import com.example.shop_taro.Model.dagger.DaggerCatalogComponent
+import androidx.room.Room
+import com.example.shop_taro.Model.dagger.DaggerOrdersComponent
+
+import com.example.shop_taro.Model.dagger.OrdersComponent
+import com.example.shop_taro.Repository.AppDatabase
 
 
 class Taro_market: Application() {
 
-    private lateinit var catalogComponent: CatalogComponent
-
+    private lateinit var catalogComponent: OrdersComponent
+    companion object {
+        lateinit var database: AppDatabase
+    }
     override fun onCreate() {
         super.onCreate()
-        catalogComponent = DaggerCatalogComponent.create()
+        catalogComponent = DaggerOrdersComponent.create()
+        database = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java,
+            "DataBase"
+        ).build()
     }
 
-    fun getCatalogComponent(): CatalogComponent {
+    fun getCatalogComponent(): OrdersComponent {
         return catalogComponent
     }
 }

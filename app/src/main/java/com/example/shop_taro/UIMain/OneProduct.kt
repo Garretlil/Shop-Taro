@@ -55,7 +55,7 @@ fun ProductItem(product: Product?, viewModel: TSViewModel, MainNavController: Na
             )
             if (product != null) {
                 Text(product.name,fontSize = 25.sp,fontWeight = FontWeight.Bold, modifier = Modifier.padding(top=16.dp))
-                Text(product.price,fontSize = 20.sp,fontWeight = FontWeight.Bold, modifier = Modifier.padding(top=8.dp))
+                Text(product.price.toString()+" ₽",fontSize = 20.sp,fontWeight = FontWeight.Bold, modifier = Modifier.padding(top=8.dp))
                 Text("Body text for describing why this product is simply a must-buy",fontSize = 15.sp, modifier = Modifier.padding(top=10.dp), color = Color.Gray)
             }
             Button(
