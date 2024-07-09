@@ -1,14 +1,20 @@
 package com.example.shop_taro.UIMain
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -30,18 +36,20 @@ import com.example.shop_taro.ViewModels.TSViewModel
 fun CardItem(product: Product?, viewModel: TSViewModel, NavController: NavHostController) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.padding(16.dp)
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth(0.5f)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.taro),
+            painter = painterResource(id = product!!.imageResource),
             contentScale = ContentScale.Fit,
             contentDescription = "Profile Image",
             modifier = Modifier
                 .fillMaxWidth()
-                .height(400.dp) // Устанавливаем высоту картинки
+                .height(200.dp) // Устанавливаем высоту картинки
                 .clip(RoundedCornerShape(16.dp)).size(150.dp) // Добавляем закругление углов
         )
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(4.dp))
         if (product != null) {
             Text(text = product.name,modifier = Modifier.clickable {
                 viewModel.updateCurrentProduct(product)
@@ -62,11 +70,27 @@ fun CardItem(product: Product?, viewModel: TSViewModel, NavController: NavHostCo
 
 @Composable
 fun Products(viewModel: TSViewModel, NavController: NavHostController) {
-    LazyColumn {
-        for (i in 0..<viewModel.catalog.getAllProducts().count()) {
-            item {
-                CardItem(viewModel.catalog.getAllProducts()[i],viewModel,NavController)
-            }
+    LazyVerticalGrid(
+        modifier = Modifier.padding(18.dp),
+        columns = GridCells.Fixed(2), // 2 колонки
+        //verticalArrangement = Arrangement.spacedBy(8.dp),
+        //horizontalArrangement = Arrangement.spacedBy(8.dp),
+        //contentPadding = PaddingValues(8.dp)
+    ) {
+        items(viewModel.catalog.getAllProducts()) { product ->
+            CardItem(product, viewModel, NavController)
         }
     }
 }
+
+
+//@Composable
+//fun Products(viewModel: TSViewModel, NavController: NavHostController) {
+//    LazyColumn {
+//        for (i in 0..<viewModel.catalog.getAllProducts().count()) {
+//            item {
+//                CardItem(viewModel.catalog.getAllProducts()[i],viewModel,NavController)
+//            }
+//        }
+//    }
+//}

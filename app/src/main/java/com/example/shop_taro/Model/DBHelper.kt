@@ -29,11 +29,15 @@ class DatabaseHelper(context: Context) : IRepository, SQLiteOpenHelper(context, 
         val data: MutableList<String> = mutableListOf()
         // Проверка, есть ли данные
         if (cursor.moveToLast()) {
+            //val idColumnIndex=cursor.getColumnIndex("id")
             val nameColumnIndex = cursor.getColumnIndex("name")
             val emailColumnIndex = cursor.getColumnIndex("email")
+
+            //val id=cursor.(idColumnIndex)
             val name = cursor.getString(nameColumnIndex)
             val email = cursor.getString(emailColumnIndex)
             // Добавление данных в список
+            //data.add(id.toString())
             data.add(name)
             data.add(email)
         }
@@ -69,9 +73,22 @@ class DatabaseHelper(context: Context) : IRepository, SQLiteOpenHelper(context, 
         return countAccount
     }
 
+    override fun saveAccount(name: String, email: String): Int {
+        TODO("Not yet implemented")
+    }
+
+    override fun getCatalog(): MutableList<Product?> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getOrders(id: Int): MutableList<Order> {
+        TODO("Not yet implemented")
+    }
+
+
     override fun delDB(){
         val db = this.writableDatabase
-        db.execSQL("DELETE FROM DataCalc")
+        db.execSQL("DELETE  FROM DataCalc")
     }
     companion object {
         private const val DATABASE_VERSION = 1

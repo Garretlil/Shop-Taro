@@ -85,13 +85,13 @@ fun StartWnd(viewModel: TSViewModel, navController: NavController) {
 
         Button(
             onClick = {
+                //var id:Int=viewModel.onLogin(name,email) получение id из retrofit
                 if (viewModel.onLogin(name,email)) {
                     context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
                         .edit()
                         .putBoolean("isLoggedIn", true)
                         .apply()
-                    viewModel.updateUserName(name)
-                    viewModel.updateUserEmail(email)
+                    viewModel.updateUser(name,email)
                     navController.navigate(Screens.MainWnd.route)
                 }
             },

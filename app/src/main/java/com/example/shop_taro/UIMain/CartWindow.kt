@@ -38,7 +38,7 @@ fun CartItemForBucket(product: Product?, viewModel: TSViewModel, NavController: 
         modifier = Modifier.padding(16.dp)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.taro),
+            painter = painterResource(id = product!!.imageResource),
             contentScale = ContentScale.Fit,
             contentDescription = "Profile Image",
             modifier = Modifier
@@ -62,9 +62,10 @@ fun CartItemForBucket(product: Product?, viewModel: TSViewModel, NavController: 
 fun Cart(viewModel: TSViewModel, MainNavController: NavHostController) {
     if(viewModel.orders.cart.listOfProducts.isEmpty()){
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().padding(18.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
+
         ) {
             Text("Ваша корзина пуста:(", fontSize = 20.sp)
         }
@@ -74,7 +75,8 @@ fun Cart(viewModel: TSViewModel, MainNavController: NavHostController) {
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            LazyColumn(modifier = Modifier.weight(1f)) {
+            LazyColumn(modifier = Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
+
                 for (i in 0..<viewModel.orders.cart.getListOfProductsFromCart().count()) {
                     item {
                         CartItemForBucket(
@@ -84,19 +86,22 @@ fun Cart(viewModel: TSViewModel, MainNavController: NavHostController) {
                         )
                     }
                 }
+                item {
+                    Button(
+                        onClick = {
+                            viewModel.createOrder()
+                            //MainNavController.navigate(Screens.MainWnd.route)
+                            //viewModel.clearCart()
+                        },
+                        modifier = Modifier.padding(bottom = 16.dp),
+                        shape = RoundedCornerShape(16.dp),
+                        colors = ButtonDefaults.buttonColors(Color.Black)
+                    ) {
+                        Text("Оформить заказ", color = Color.White)
+                    }
+                }
             }
-            Button(
-                onClick = {
-                    viewModel.createOrder()
-                    //MainNavController.navigate(Screens.MainWnd.route)
-                    //viewModel.clearCart()
-                },
-                modifier = Modifier.padding(bottom = 180.dp),
-                shape = RoundedCornerShape(16.dp),
-                colors = ButtonDefaults.buttonColors(Color.Black)
-            ) {
-                Text("Оформить заказ", color = Color.White)
-            }
+
         }
     }
 }

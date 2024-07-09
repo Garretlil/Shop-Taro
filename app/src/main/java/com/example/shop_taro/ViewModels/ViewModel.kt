@@ -47,11 +47,8 @@ class TSViewModel(application: Application): AndroidViewModel(application){
     fun onChangeTelephone(telephone:String){
         profile.changeTelephone(telephone)
     }
-    fun updateUserName(name:String){
+    fun updateUser(name:String,email:String){
         profile.changeNameFromDB(name)
-    }
-    fun updateUserEmail(email:String){
-        profile.changeEmailFromDB(email)
     }
     fun createOrder(){
         orders.createOrder()

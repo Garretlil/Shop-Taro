@@ -8,7 +8,7 @@ data class Product(
     val imageResource:Int,
     val id:Int
     )
-@Singleton
+
 class Catalog() {
     private val listOfProducts: MutableList<Product> = mutableListOf()
     init{
@@ -18,11 +18,11 @@ class Catalog() {
         return listOfProducts
     }
     fun getAllProductsFromDB() {
-        this.listOfProducts.add(Product("Taro1", 10000, R.drawable.taro,1))
-        this.listOfProducts.add(Product("Taro2", 12000, R.drawable.taro2,2))
-        this.listOfProducts.add(Product("Taro3", 13000, R.drawable.taro,3))
-        this.listOfProducts.add(Product("Taro4", 14000, R.drawable.taro2,4))
-        this.listOfProducts.add(Product("Taro5", 15000, R.drawable.taro,5))
+        this.listOfProducts.add(Product("Taro cards", 10000, R.drawable.taro,1))
+        this.listOfProducts.add(Product("Taro circle", 12000, R.drawable.taro2,2))
+        this.listOfProducts.add(Product("SpeedTail", 13000, R.drawable.mclarenspeed,3))
+        this.listOfProducts.add(Product("Lotus", 14000, R.drawable.lotus2,4))
+        this.listOfProducts.add(Product("Centodieci", 15000, R.drawable.bugatti,5))
     }
 
 //    fun addProductToCart(product:Product) {
