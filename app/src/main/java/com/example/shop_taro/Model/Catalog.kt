@@ -3,10 +3,13 @@ import com.example.shop_taro.R
 import javax.inject.Singleton
 
 data class Product(
+    var id:Int,
     var name:String,
-    var price:Int,
+    val description:String,
     val imageResource:Int,
-    val id:Int
+    val price:Int,
+    val old_price:Int,
+    val amount:Int=0
     )
 
 class Catalog() {
@@ -18,11 +21,11 @@ class Catalog() {
         return listOfProducts
     }
     fun getAllProductsFromDB() {
-        this.listOfProducts.add(Product("Taro cards", 10000, R.drawable.taro,1))
-        this.listOfProducts.add(Product("Taro circle", 12000, R.drawable.taro2,2))
-        this.listOfProducts.add(Product("SpeedTail", 13000, R.drawable.mclarenspeed,3))
-        this.listOfProducts.add(Product("Lotus", 14000, R.drawable.lotus2,4))
-        this.listOfProducts.add(Product("Centodieci", 15000, R.drawable.bugatti,5))
+        this.listOfProducts.add(Product(1,"Taro cards", "...",R.drawable.taro,10000,old_price = -1))
+        this.listOfProducts.add(Product(2,"Taro circle","...",  R.drawable.taro2,12000,old_price = -1))
+        this.listOfProducts.add(Product(3,"SpeedTail", "...", R.drawable.mclarenspeed,13000,old_price = -1))
+        this.listOfProducts.add(Product(4,"Lotus",  "...",R.drawable.lotus2,14000,old_price = -1))
+        this.listOfProducts.add(Product(5,"Centodieci","...",  R.drawable.bugatti,15000,old_price = -1))
     }
 
 //    fun addProductToCart(product:Product) {

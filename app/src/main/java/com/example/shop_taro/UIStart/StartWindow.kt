@@ -82,7 +82,6 @@ fun StartWnd(viewModel: TSViewModel, navController: NavController) {
                 focusedBorderColor = Color.Black // Цвет границы в активном состоянии
             ), singleLine = true
         )
-
         Button(
             onClick = {
                 //var id:Int=viewModel.onLogin(name,email) получение id из retrofit

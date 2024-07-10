@@ -1,5 +1,6 @@
 package com.example.shop_taro.UIStart
 
+import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -35,6 +37,11 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AuthWnd(viewModel: TSViewModel, navController: NavHostController){
+//    val context = LocalContext.current
+//    val isLoggedIn = remember {
+//        mutableStateOf(context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+//            .getBoolean("isLoggedIn", false))
+//    }
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -78,6 +85,10 @@ fun AuthWnd(viewModel: TSViewModel, navController: NavHostController){
                 //viewModel.db.delDB()
                 viewModel.onAuth(name,email)
                 viewModel.updateUser(name,email)
+//                context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+//                    .edit()
+//                    .putBoolean("isLoggedIn", true)
+//                    .apply()
                 navController.navigate(Screens.MainWnd.route)
             },
             modifier = Modifier.padding(bottom = 180.dp),

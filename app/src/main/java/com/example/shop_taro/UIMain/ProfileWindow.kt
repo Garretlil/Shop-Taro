@@ -56,7 +56,7 @@ fun Profile(viewModel: TSViewModel, navController: NavController) {
 
         Button(
             onClick = {
-                viewModel.db.delDB()
+                //viewModel.db.delDB()
                 context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
                     .edit()
                     .putBoolean("isLoggedIn", false)

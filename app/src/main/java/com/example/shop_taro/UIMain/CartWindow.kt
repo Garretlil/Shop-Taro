@@ -59,7 +59,7 @@ fun CartItemForBucket(product: Product?, viewModel: TSViewModel, NavController: 
 }
 
 @Composable
-fun Cart(viewModel: TSViewModel, MainNavController: NavHostController) {
+fun Cart(viewModel: TSViewModel, navController: NavHostController) {
     if(viewModel.orders.cart.listOfProducts.isEmpty()){
         Column(
             modifier = Modifier.fillMaxSize().padding(18.dp),
@@ -82,7 +82,7 @@ fun Cart(viewModel: TSViewModel, MainNavController: NavHostController) {
                         CartItemForBucket(
                             viewModel.orders.cart.getListOfProductsFromCart()[i],
                             viewModel,
-                            MainNavController
+                            navController
                         )
                     }
                 }
@@ -92,6 +92,7 @@ fun Cart(viewModel: TSViewModel, MainNavController: NavHostController) {
                             viewModel.createOrder()
                             //MainNavController.navigate(Screens.MainWnd.route)
                             //viewModel.clearCart()
+                            navController.navigate(NavRoutes.Orders.route)
                         },
                         modifier = Modifier.padding(bottom = 16.dp),
                         shape = RoundedCornerShape(16.dp),

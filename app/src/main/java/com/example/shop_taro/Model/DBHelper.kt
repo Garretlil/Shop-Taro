@@ -85,6 +85,10 @@ class DatabaseHelper(context: Context) : IRepository, SQLiteOpenHelper(context, 
         TODO("Not yet implemented")
     }
 
+    override fun make_order(order: Order) {
+        TODO("Not yet implemented")
+    }
+
 
     override fun delDB(){
         val db = this.writableDatabase

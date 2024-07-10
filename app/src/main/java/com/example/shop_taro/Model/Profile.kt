@@ -8,8 +8,10 @@ class Profile(db_:IRepository){
      var email:String=""
      var telephone:String=""
     init{
-        name=db.getData()[0]
-        email=db.getData()[1]
+        if (db.getData().isNotEmpty()) {
+            name = db.getData()[0]
+            email = db.getData()[1]
+        }
     }
 
     fun changeName(name_:String){

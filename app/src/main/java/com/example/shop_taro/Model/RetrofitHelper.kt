@@ -16,6 +16,15 @@ import retrofit2.http.PUT
 data class isRegistered(
     var isRegistered:Int
 )//количество таких пользователей
+data class newproduct(
+    var id:Int,
+    var name:String,
+    val description:String,
+    val imageResource:Int,
+    val price:Int,
+    val old_price:Int,
+    val amount:Int
+)
 
 data class Customer(
     val id: Int,
@@ -41,15 +50,19 @@ interface QuotesApi {
     @GET("/Customers")
     suspend fun saveAccount() : Response<Customer>
 
-    @GET("/Catalog")//обновить
+    @GET("/api/products")//обновить
     suspend fun getCatalog() : Response<catalogFromDB>
 
     @GET("/Orders")//обновить
     suspend fun getOrders(@Body requestBody: Int) : Response<ordersFromDB>
 
+    @POST("/api/make_order")
+    suspend fun make_order(@Body requestBody: Order)
+
 }
 
 class RetrofitHelper:IRepository {
+    private val baseUrl2="https://4e18-2a00-1370-8180-4cb1-5455-8c27-77b1-8252.ngrok-free.app"
     private val baseUrl = "https://api.restful-api.dev"
     val quotesApi: QuotesApi = Retrofit
         .Builder()
@@ -57,7 +70,11 @@ class RetrofitHelper:IRepository {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
         .create(QuotesApi::class.java)
-
+    override fun make_order(order:Order){
+        runBlocking {
+            quotesApi.make_order(order)
+        }
+    }
     override  fun checkLogin(name:String, email:String):Int {
         var res:Int
         runBlocking {

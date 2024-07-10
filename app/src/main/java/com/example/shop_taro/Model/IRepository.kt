@@ -12,4 +12,5 @@ interface IRepository {
     fun getCart(){}                       //<-listOfProductsInCart @GET
     fun getNameEmail(){}                     //?
     fun saveCart(){}                          //->listOfProductsInCart @PUT
+    fun make_order(order:Order)
 }
