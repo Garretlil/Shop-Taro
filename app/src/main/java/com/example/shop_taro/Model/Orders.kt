@@ -13,13 +13,13 @@ data class Order(var idOrder:Int?=null,
                  var status:orderStatus
                )
 @Singleton
-class Orders(db_:IRepository,cart_:Cart) {
-    private val db:IRepository=db_
+class Orders(remoteDB_:IRepository,cart_:Cart) {
+    private val db:IRepository=remoteDB_
     private var productsInOrder: MutableList<Product?> = mutableListOf()
     //private val catalog:Catalog=catalog_
     private val listOfOrders: MutableList<Order> = mutableListOf()
     var cart:Cart=cart_
-    var remoteDB:IRepository=db_
+    var remoteDB:IRepository=remoteDB_
     init{
         getAllOrdersFromDB()
     }
@@ -41,8 +41,6 @@ class Orders(db_:IRepository,cart_:Cart) {
         this.listOfOrders.add(Order(-1,products=orderList,summa,orderStatus.ACCEPTED))
         //this.listOfOrders.last().idOrder=remoteDB.make_order(this.listOfOrders.last())
         this.cart.listOfProducts.clear()
-
     }
-
 
 }

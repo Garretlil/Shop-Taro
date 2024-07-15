@@ -15,20 +15,22 @@ import com.example.shop_taro.Model.Product
 import com.example.shop_taro.Model.Profile
 import com.example.shop_taro.Model.RetrofitHelper
 import com.example.shop_taro.Taro_market
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
+@HiltViewModel
+class TSViewModel @Inject constructor(
+    application: Application,
+     val orders: Orders,
+     val remoteDB: IRepository,
+     val db: IRepository,
+     val catalog: Catalog,
+     val profile: Profile
+) : AndroidViewModel(application) {
 
-class TSViewModel(application: Application): AndroidViewModel(application){
-    var remoteDB:IRepository=RetrofitHelper()
-    var db: IRepository = DatabaseHelper(application)
-    //var dbR:IRepository=RetrofitHelper()
-    val orders: Orders = (application as Taro_market).getCatalogComponent().orders
-    var catalog:Catalog=Catalog()
-
-    private var login:Login=Login(remoteDB,db)
-    private var auth:Auth=Auth(remoteDB,db)
-
-    var currentProduct: Product?=null
-    var profile:Profile=Profile(db)
+    private val login = Login(remoteDB, db)
+    private val auth = Auth(remoteDB, db)
+    var currentProduct: Product? = null
     //функции обработчики
     fun onLogin(name:String,email:String):Boolean {
         return login.checkLogin(name,email)

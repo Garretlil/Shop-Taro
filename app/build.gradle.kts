@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
 
+    id("com.google.dagger.hilt.android")
+
 }
 
 android {
@@ -56,18 +58,24 @@ android {
         }
     }
 }
-val daggerVersion = "2.51.1"
-val dagger = "com.google.dagger:dagger:$daggerVersion"
-val daggerCompiler = "com.google.dagger:dagger-compiler:$daggerVersion"
-
 dependencies {
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
-    // ...
-    // Dagger
-    implementation(dagger)
-    kapt(daggerCompiler)
+
+    implementation ("com.google.dagger:hilt-android:2.51.1")
+    annotationProcessor ("com.google.dagger:hilt-compiler:2.51.1")
+
+    // For instrumentation tests
+    androidTestImplementation  ("com.google.dagger:hilt-android-testing:2.51.1")
+    androidTestAnnotationProcessor ("com.google.dagger:hilt-compiler:2.51.1")
+
+    // For local unit tests
+    testImplementation ("com.google.dagger:hilt-android-testing:2.51.1")
+    testAnnotationProcessor ("com.google.dagger:hilt-compiler:2.51.1")
+
+    // ... other dependencies ...
     implementation("io.coil-kt:coil-compose:2.6.0")
+
     implementation ("androidx.room:room-runtime:2.6.1") // Библиотека "Room"
     kapt ("androidx.room:room-compiler:2.6.1") // Кодогенератор
     implementation ("androidx.room:room-ktx:2.6.1") // Дополнительно для Kotlin Coroutines, Kotlin Flows
@@ -76,7 +84,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui) // Use ui-android
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
