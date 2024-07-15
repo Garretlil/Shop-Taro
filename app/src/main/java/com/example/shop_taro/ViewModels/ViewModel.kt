@@ -13,18 +13,19 @@ import com.example.shop_taro.Model.Login
 import com.example.shop_taro.Model.Orders
 import com.example.shop_taro.Model.Product
 import com.example.shop_taro.Model.Profile
+import com.example.shop_taro.Model.RetrofitHelper
 import com.example.shop_taro.Taro_market
 
 
 class TSViewModel(application: Application): AndroidViewModel(application){
-
+    var remoteDB:IRepository=RetrofitHelper()
     var db: IRepository = DatabaseHelper(application)
     //var dbR:IRepository=RetrofitHelper()
     val orders: Orders = (application as Taro_market).getCatalogComponent().orders
     var catalog:Catalog=Catalog()
 
-    private var login:Login=Login(db)
-    private var auth:Auth=Auth(db)
+    private var login:Login=Login(remoteDB,db)
+    private var auth:Auth=Auth(remoteDB,db)
 
     var currentProduct: Product?=null
     var profile:Profile=Profile(db)
@@ -47,7 +48,7 @@ class TSViewModel(application: Application): AndroidViewModel(application){
     fun onChangeTelephone(telephone:String){
         profile.changeTelephone(telephone)
     }
-    fun updateUser(name:String,email:String){
+    fun setProfileData(name:String,email:String){
         profile.changeNameFromDB(name)
     }
     fun createOrder(){

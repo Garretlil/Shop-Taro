@@ -26,6 +26,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import coil.compose.rememberAsyncImagePainter
 import com.example.shop_taro.Model.Product
 import com.example.shop_taro.R
 import com.example.shop_taro.Screens
@@ -38,7 +39,7 @@ fun CartItemForBucket(product: Product?, viewModel: TSViewModel, NavController: 
         modifier = Modifier.padding(16.dp)
     ) {
         Image(
-            painter = painterResource(id = product!!.imageResource),
+            painter = rememberAsyncImagePainter(product!!.imageResource),
             contentScale = ContentScale.Fit,
             contentDescription = "Profile Image",
             modifier = Modifier
@@ -47,14 +48,13 @@ fun CartItemForBucket(product: Product?, viewModel: TSViewModel, NavController: 
                 .clip(RoundedCornerShape(16.dp)).size(150.dp)
         )
         Spacer(modifier = Modifier.height(8.dp))
-        if (product != null) {
-            Text(text = product.name,
-                modifier = Modifier.clickable {
-                    viewModel.updateCurrentProduct(product)
-                    NavController.navigate(NavRoutes.Product.route)
-                })
-            Text(text = product.price.toString()+" ₽")
-        }
+        Text(text = product.name,
+             modifier = Modifier.clickable {
+             viewModel.updateCurrentProduct(product)
+             NavController.navigate(NavRoutes.Product.route)
+             }
+        )
+        Text(text = product.price.toString()+" ₽")
     }
 }
 

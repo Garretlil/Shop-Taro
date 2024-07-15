@@ -85,7 +85,7 @@ class DatabaseHelper(context: Context) : IRepository, SQLiteOpenHelper(context, 
         TODO("Not yet implemented")
     }
 
-    override fun make_order(order: Order) {
+    override fun make_order(order: Order):Int {
         TODO("Not yet implemented")
     }
 

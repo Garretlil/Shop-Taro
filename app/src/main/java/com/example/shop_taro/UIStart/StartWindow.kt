@@ -90,7 +90,7 @@ fun StartWnd(viewModel: TSViewModel, navController: NavController) {
                         .edit()
                         .putBoolean("isLoggedIn", true)
                         .apply()
-                    viewModel.updateUser(name,email)
+                    viewModel.setProfileData(name,email)
                     navController.navigate(Screens.MainWnd.route)
                 }
             },

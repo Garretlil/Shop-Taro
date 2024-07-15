@@ -26,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.rememberAsyncImagePainter
 import com.example.shop_taro.Model.Order
 import com.example.shop_taro.R
 import com.example.shop_taro.ViewModels.TSViewModel
@@ -72,7 +73,7 @@ fun OrderCard(order:Order) {
                 ) {
                     for (i in 0..<order.products.count()) {
                         Image(
-                            painter = painterResource(id = order.products[i]!!.imageResource),
+                            painter = rememberAsyncImagePainter(order.products[i]!!.imageResource),
                             contentDescription = "Image $i",
                             modifier = Modifier.size(50.dp),
                             contentScale = ContentScale.Crop

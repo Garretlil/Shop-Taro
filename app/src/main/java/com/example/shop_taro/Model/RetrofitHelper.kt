@@ -14,20 +14,14 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 
 data class isRegistered(
-    var isRegistered:Int
-)//количество таких пользователей
-data class newproduct(
-    var id:Int,
-    var name:String,
-    val description:String,
-    val imageResource:Int,
-    val price:Int,
-    val old_price:Int,
-    val amount:Int
+    var isRegistered:Int //количество таких пользователей
+)
+data class id_Order(
+    var id_order:Int //количество таких пользователей
 )
 
 data class Customer(
-    val id: Int,
+    val id: Int?=null,
     val name: String? = null,
     val email:String?=null
 )
@@ -39,25 +33,24 @@ data class catalogFromDB(
     var catalogList: MutableList<Product?> = mutableListOf()
 )
 data class ordersFromDB(
-    var idCustomer:Int,
     var ordersList: MutableList<Order> = mutableListOf()
 )
 
 interface QuotesApi {
     @GET("/Customers")
-    suspend fun checkLogin() : Response<isRegistered>
+    suspend fun checkLogin(@Body requestBody: Customer) : Response<isRegistered>
 
     @GET("/Customers")
-    suspend fun saveAccount() : Response<Customer>
+    suspend fun saveAccount(@Body requestBody: Customer) : Response<Customer>
 
     @GET("/api/products")//обновить
-    suspend fun getCatalog() : Response<catalogFromDB>
+    suspend fun getCatalog() : Response<catalogFromDB>//done
 
     @GET("/Orders")//обновить
     suspend fun getOrders(@Body requestBody: Int) : Response<ordersFromDB>
 
     @POST("/api/make_order")
-    suspend fun make_order(@Body requestBody: Order)
+    suspend fun make_order(@Body requestBody: Order): Response<id_Order>//done
 
 }
 
@@ -70,22 +63,24 @@ class RetrofitHelper:IRepository {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
         .create(QuotesApi::class.java)
-    override fun make_order(order:Order){
+    override fun make_order(order:Order): Int{
+        val res:Int
         runBlocking {
-            quotesApi.make_order(order)
-        }
-    }
-    override  fun checkLogin(name:String, email:String):Int {
-        var res:Int
-        runBlocking {
-            res= quotesApi.checkLogin().body()!!.isRegistered
+            res=quotesApi.make_order(order).body()!!.id_order
         }
         return res
     }
-    override  fun saveAccount(name:String, email:String):Int {
+    override fun checkLogin(name:String, email:String):Int {
         var res:Int
         runBlocking {
-            res= quotesApi.saveAccount().body()!!.id
+            res= quotesApi.checkLogin(Customer(null,name,email)).body()!!.isRegistered
+        }
+        return res
+    }
+    override  fun saveAccount(name:String, email:String):Int? {
+        var res:Int?
+        runBlocking {
+            res= quotesApi.saveAccount(Customer(null,name,email)).body()!!.id
         }
         return res
     }

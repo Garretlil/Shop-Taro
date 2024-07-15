@@ -67,7 +67,7 @@ dependencies {
     // Dagger
     implementation(dagger)
     kapt(daggerCompiler)
-
+    implementation("io.coil-kt:coil-compose:2.6.0")
     implementation ("androidx.room:room-runtime:2.6.1") // Библиотека "Room"
     kapt ("androidx.room:room-compiler:2.6.1") // Кодогенератор
     implementation ("androidx.room:room-ktx:2.6.1") // Дополнительно для Kotlin Coroutines, Kotlin Flows

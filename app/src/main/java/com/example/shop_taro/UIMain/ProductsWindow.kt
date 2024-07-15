@@ -24,6 +24,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import coil.compose.rememberAsyncImagePainter
 import com.example.shop_taro.Model.Product
 import com.example.shop_taro.ViewModels.TSViewModel
 
@@ -36,7 +37,8 @@ fun CardItem(product: Product?, viewModel: TSViewModel, NavController: NavHostCo
             .fillMaxWidth(0.5f)
     ) {
         Image(
-            painter = painterResource(id = product!!.imageResource),
+            painter = rememberAsyncImagePainter(product!!.imageResource),
+            //painter = painterResource(id = product!!.imageResource),
             contentScale = ContentScale.Fit,
             contentDescription = "Profile Image",
             modifier = Modifier

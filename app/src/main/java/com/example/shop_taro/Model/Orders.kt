@@ -7,17 +7,19 @@ enum class orderStatus(status:String){
     ACCEPTED("оформлен"),DELIVERY("доставка"),OBTAINED("получен")
 }
 
-data class Order( val idOrder:Int,
-                  var products:MutableList<Product?>,
-                  var summa:Int,
-                  var status:orderStatus
+data class Order(var idOrder:Int?=null,
+                 var products:MutableList<Product?>,
+                 var summa:Int,
+                 var status:orderStatus
                )
 @Singleton
-class Orders(cart_:Cart) {
+class Orders(db_:IRepository,cart_:Cart) {
+    private val db:IRepository=db_
     private var productsInOrder: MutableList<Product?> = mutableListOf()
     //private val catalog:Catalog=catalog_
     private val listOfOrders: MutableList<Order> = mutableListOf()
     var cart:Cart=cart_
+    var remoteDB:IRepository=db_
     init{
         getAllOrdersFromDB()
     }
@@ -25,16 +27,21 @@ class Orders(cart_:Cart) {
         return listOfOrders
     }
     fun getAllOrdersFromDB() {
-        //this.listOfOrders.add(Order(1,products=catalog.cart.listOfProducts,18000,orderStatus.ACCEPTED))
+        //this.listOfOrders=db.getOrders(id_customer)
     }
     fun createOrder(){
         var summa:Int=0
+        val id:Int=1
         for (i in 0..<this.cart.listOfProducts.count()){
             summa+=this.cart.listOfProducts[i]!!.price
         }
-        val orderlist=this.cart.listOfProducts.toMutableList()
-        this.listOfOrders.add(Order(1,products=orderlist,summa,orderStatus.ACCEPTED))
+        //получение id заказа
+            //...
+        val orderList=this.cart.listOfProducts.toMutableList()
+        this.listOfOrders.add(Order(-1,products=orderList,summa,orderStatus.ACCEPTED))
+        //this.listOfOrders.last().idOrder=remoteDB.make_order(this.listOfOrders.last())
         this.cart.listOfProducts.clear()
+
     }
 
 

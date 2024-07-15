@@ -8,7 +8,6 @@ class Cart() {
     }
     fun addProductToCart(product: Product?){
         listOfProducts.add(product)
-        val t=5
     }
 }
 

@@ -25,6 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import coil.compose.rememberAsyncImagePainter
 import com.example.shop_taro.Model.Product
 import com.example.shop_taro.R
 import com.example.shop_taro.ViewModels.TSViewModel
@@ -45,7 +46,7 @@ fun ProductItem(product: Product?, viewModel: TSViewModel, MainNavController: Na
         ) {
             Text("Title", fontSize = 16.sp,fontWeight = FontWeight.Medium, modifier = Modifier.padding(top=27.dp))
             Image(
-                painter = painterResource(id = R.drawable.taro),
+                painter = rememberAsyncImagePainter(product!!.imageResource),
                 contentScale = ContentScale.Fit,
                 contentDescription = "Profile Image",
                 modifier = Modifier
