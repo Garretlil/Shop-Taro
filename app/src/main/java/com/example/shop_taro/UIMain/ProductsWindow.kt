@@ -26,7 +26,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.example.shop_taro.Model.Product
-import com.example.shop_taro.ViewModels.TSViewModel
+import com.example.shop_taro.TSViewModel
+
 
 @Composable
 fun CardItem(product: Product?, viewModel: TSViewModel, NavController: NavHostController) {

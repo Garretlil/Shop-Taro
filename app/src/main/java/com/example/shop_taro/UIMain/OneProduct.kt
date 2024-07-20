@@ -26,9 +26,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
+
 import com.example.shop_taro.Model.Product
-import com.example.shop_taro.R
-import com.example.shop_taro.ViewModels.TSViewModel
+import com.example.shop_taro.TSViewModel
+
 
 @Composable
 fun ProductItem(product: Product?, viewModel: TSViewModel, MainNavController: NavHostController){

@@ -1,5 +1,8 @@
 package com.example.shop_taro.Model
 
+import dagger.Provides
+import javax.inject.Inject
+
 
 interface IRepository {
     fun getData():MutableList<String>

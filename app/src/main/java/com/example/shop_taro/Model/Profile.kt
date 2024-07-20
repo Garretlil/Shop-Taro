@@ -1,19 +1,25 @@
 package com.example.shop_taro.Model
 
 
-class Profile(db_:IRepository){
-    private val db:IRepository=db_
-     var id:Int=0
+import kotlinx.coroutines.runBlocking
+
+
+class Profile(db_: AppDatabase){
+    private val db: AppDatabase =db_
+     var id:Int?=null
      var name:String=""
      var email:String=""
      var telephone:String=""
+     lateinit var list:List<User>
     init{
-        if (db.getData().isNotEmpty()) {
-            name = db.getData()[0]
-            email = db.getData()[1]
+        runBlocking {
+             list= db.userDao().getAllUsers()
+             if(list.isNotEmpty()){
+                 name = list.last().name
+                 email = list.last().email
+            }
         }
     }
-
     fun changeName(name_:String){
         name=name_
     }
@@ -22,11 +28,15 @@ class Profile(db_:IRepository){
     }
     fun changeNameFromDB(name_:String){
         //id=db.getData()[0].toInt()
-        name=db.getData()[0]
-        email=db.getData()[1]
+        runBlocking {
+            name = db.userDao().getAllUsers().last().name
+            email = db.userDao().getAllUsers().last().email
+        }
     }
     fun changeEmailFromDB(name_:String){
-        email=db.getData()[1]
+        runBlocking {
+            email = db.userDao().getAllUsers().last().email
+        }
     }
 
 }

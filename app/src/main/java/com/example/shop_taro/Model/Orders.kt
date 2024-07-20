@@ -1,5 +1,6 @@
 package com.example.shop_taro.Model
 
+import javax.inject.Inject
 import javax.inject.Singleton
 
 
@@ -13,13 +14,15 @@ data class Order(var idOrder:Int?=null,
                  var status:orderStatus
                )
 @Singleton
-class Orders(remoteDB_:IRepository,cart_:Cart) {
-    private val db:IRepository=remoteDB_
+class Orders(cart_:Cart) {
+    @Inject
+    lateinit var remoteDB:RetrofitHelper
+    //private val db:IRepository=remoteDB_
     private var productsInOrder: MutableList<Product?> = mutableListOf()
     //private val catalog:Catalog=catalog_
-    private val listOfOrders: MutableList<Order> = mutableListOf()
+    private var listOfOrders: MutableList<Order> = mutableListOf()
     var cart:Cart=cart_
-    var remoteDB:IRepository=remoteDB_
+    //var remoteDB:IRepository=remoteDB_
     init{
         getAllOrdersFromDB()
     }
@@ -27,7 +30,7 @@ class Orders(remoteDB_:IRepository,cart_:Cart) {
         return listOfOrders
     }
     fun getAllOrdersFromDB() {
-        //this.listOfOrders=db.getOrders(id_customer)
+        //this.listOfOrders=remoteDB.getOrders(id_customer)
     }
     fun createOrder(){
         var summa:Int=0

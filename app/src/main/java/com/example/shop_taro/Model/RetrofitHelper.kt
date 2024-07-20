@@ -1,17 +1,13 @@
 package com.example.shop_taro.Model
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.PUT
+import javax.inject.Inject
 
 data class isRegistered(
     var isRegistered:Int //количество таких пользователей
@@ -54,7 +50,7 @@ interface QuotesApi {
 
 }
 
-class RetrofitHelper:IRepository {
+class RetrofitHelper @Inject constructor():IRepository {
     private val baseUrl2="https://4e18-2a00-1370-8180-4cb1-5455-8c27-77b1-8252.ngrok-free.app"
     private val baseUrl = "https://api.restful-api.dev"
     val quotesApi: QuotesApi = Retrofit

@@ -26,7 +26,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.shop_taro.ViewModels.TSViewModel
+import com.example.shop_taro.TSViewModel
+
 import com.example.shop_taro.ui.theme.IconColor
 
 sealed class NavRoutes(val route: String) {

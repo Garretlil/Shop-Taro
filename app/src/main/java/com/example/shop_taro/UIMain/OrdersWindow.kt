@@ -28,8 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.example.shop_taro.Model.Order
-import com.example.shop_taro.R
-import com.example.shop_taro.ViewModels.TSViewModel
+import com.example.shop_taro.TSViewModel
 
 
 @Composable
@@ -92,7 +91,7 @@ fun OrderCard(order:Order) {
 }
 
 @Composable
-fun Orders(viewModel:TSViewModel){
+fun Orders(viewModel: TSViewModel){
     LazyColumn {
         for (i in 0..<viewModel.orders.getAllOrders().count()) {
             item {

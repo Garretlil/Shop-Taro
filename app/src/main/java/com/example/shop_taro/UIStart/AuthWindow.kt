@@ -28,20 +28,19 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.shop_taro.Model.Auth
 import com.example.shop_taro.Screens
-import com.example.shop_taro.ViewModels.TSViewModel
+import com.example.shop_taro.TSViewModel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AuthWnd(viewModel: TSViewModel, navController: NavHostController){
-//    val context = LocalContext.current
-//    val isLoggedIn = remember {
-//        mutableStateOf(context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-//            .getBoolean("isLoggedIn", false))
-//    }
+    val context = LocalContext.current
+    val isLoggedIn = remember {
+        mutableStateOf(context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+            .getBoolean("isLoggedIn", false))
+    }
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -82,13 +81,12 @@ fun AuthWnd(viewModel: TSViewModel, navController: NavHostController){
         Button(
             onClick = {
                 //var id:Int=viewModel.onAuth(name,email)
-                //viewModel.db.delDB()
                 viewModel.onAuth(name,email)
                 viewModel.setProfileData(name,email)
-//                context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-//                    .edit()
-//                    .putBoolean("isLoggedIn", true)
-//                    .apply()
+                context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+                    .edit()
+                    .putBoolean("isLoggedIn", true)
+                    .apply()
                 navController.navigate(Screens.MainWnd.route)
             },
             modifier = Modifier.padding(bottom = 180.dp),

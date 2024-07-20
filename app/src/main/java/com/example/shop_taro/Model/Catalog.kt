@@ -1,6 +1,7 @@
 package com.example.shop_taro.Model
-import com.example.shop_taro.R
-import javax.inject.Singleton
+
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 data class Product(
     var id:Int,
@@ -13,15 +14,18 @@ data class Product(
     )
 
 class Catalog() {
-    private val listOfProducts: MutableList<Product> = mutableListOf()
+    @Inject
+    lateinit var remoteDB:RetrofitHelper
+
+    private var listOfProducts: MutableList<Product?> = mutableListOf()
     init{
         getAllProductsFromDB()
     }
-    fun getAllProducts(): MutableList<Product> {
+    fun getAllProducts(): MutableList<Product?> {
         return listOfProducts
     }
     private fun getAllProductsFromDB() {
-        //this.listOfProducts=db.getCatalog().catalogList
+        //this.listOfProducts=remoteDB.getCatalog()
         this.listOfProducts.add(Product(1,"Taro cards", "...",
             "https://klev.club/uploads/posts/2023-10/1697623509_klev-club-p-risunki-karti-taro-ueita-17.png",10000,old_price = -1))
         this.listOfProducts.add(Product(2,"Taro circle","...",

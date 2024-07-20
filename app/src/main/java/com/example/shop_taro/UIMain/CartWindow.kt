@@ -28,9 +28,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.example.shop_taro.Model.Product
-import com.example.shop_taro.R
-import com.example.shop_taro.Screens
-import com.example.shop_taro.ViewModels.TSViewModel
+import com.example.shop_taro.TSViewModel
+
 
 @Composable
 fun CartItemForBucket(product: Product?, viewModel: TSViewModel, NavController: NavHostController) {
@@ -50,7 +49,7 @@ fun CartItemForBucket(product: Product?, viewModel: TSViewModel, NavController: 
         Spacer(modifier = Modifier.height(8.dp))
         Text(text = product.name,
              modifier = Modifier.clickable {
-             viewModel.updateCurrentProduct(product)
+             //viewModel.updateCurrentProduct(product)
              NavController.navigate(NavRoutes.Product.route)
              }
         )

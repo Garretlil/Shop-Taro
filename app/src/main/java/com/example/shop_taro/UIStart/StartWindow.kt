@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.shop_taro.Screens
-import com.example.shop_taro.ViewModels.TSViewModel
+import com.example.shop_taro.TSViewModel
 import com.example.shop_taro.ui.theme.BlueR
 
 
@@ -90,7 +90,7 @@ fun StartWnd(viewModel: TSViewModel, navController: NavController) {
                         .edit()
                         .putBoolean("isLoggedIn", true)
                         .apply()
-                    viewModel.setProfileData(name,email)
+
                     navController.navigate(Screens.MainWnd.route)
                 }
             },
