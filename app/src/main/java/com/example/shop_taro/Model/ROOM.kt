@@ -29,6 +29,12 @@ interface UserDao {
 
     @Query("DELETE FROM users")
     suspend fun deleteAllData()
+
+    @Query("UPDATE users SET name=:name")
+    suspend fun changeName(name:String)
+
+    @Query("UPDATE users SET email=:email")
+    suspend fun changeEmail(email:String)
 }
 
 @Database(entities = [User::class], version = 2, exportSchema = false)

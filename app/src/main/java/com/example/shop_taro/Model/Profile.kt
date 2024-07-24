@@ -20,23 +20,15 @@ class Profile(db_: AppDatabase){
             }
         }
     }
-    fun changeName(name_:String){
-        name=name_
-    }
     fun changeTelephone(telephone_:String){
         telephone=telephone_
     }
-    fun changeNameFromDB(name_:String){
-        //id=db.getData()[0].toInt()
-        runBlocking {
-            name = db.userDao().getAllUsers().last().name
-            email = db.userDao().getAllUsers().last().email
-        }
+
+    fun changeName(name:String){
+        runBlocking { db.userDao().changeName(name) }
     }
-    fun changeEmailFromDB(name_:String){
-        runBlocking {
-            email = db.userDao().getAllUsers().last().email
-        }
+    fun changeEmail(email:String){
+        runBlocking { db.userDao().changeEmail(email) }
     }
 
 }

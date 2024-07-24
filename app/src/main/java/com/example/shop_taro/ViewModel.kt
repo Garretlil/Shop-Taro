@@ -48,14 +48,15 @@ class TSViewModel @Inject constructor (
     fun addToCart(product: Product?){
         orders.cart.addProductToCart(product)
     }
-    fun onChangeName(name:String){
+    fun onChangeProfileData(name:String,email:String){
         profile.changeName(name)
+        profile.changeEmail(email)
     }
     fun onChangeTelephone(telephone:String){
         profile.changeTelephone(telephone)
     }
-    fun setProfileData(name:String,email:String){
-        profile.changeNameFromDB(name)
+    fun onChangeEmail(name:String,email:String){
+        profile.changeName(name)
     }
     fun createOrder(){
         orders.createOrder()

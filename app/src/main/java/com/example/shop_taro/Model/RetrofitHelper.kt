@@ -39,8 +39,8 @@ interface QuotesApi {
     @GET("/Customers")
     suspend fun saveAccount(@Body requestBody: Customer) : Response<Customer>
 
-    @GET("/api/products")//обновить
-    suspend fun getCatalog() : Response<catalogFromDB>//done
+    @GET("/")//обновить
+    suspend fun getCatalog() : Response<MutableList<Product>>//done
 
     @GET("/Orders")//обновить
     suspend fun getOrders(@Body requestBody: Int) : Response<ordersFromDB>
@@ -80,10 +80,10 @@ class RetrofitHelper @Inject constructor():IRepository {
         }
         return res
     }
-    override  fun getCatalog(): MutableList<Product?> {
-        var listOfProducts: MutableList<Product?>
+    override fun getCatalog(): MutableList<Product> {
+        var listOfProducts:MutableList<Product>
         runBlocking {
-            listOfProducts = quotesApi.getCatalog().body()!!.catalogList
+            listOfProducts = quotesApi.getCatalog().body()!!
         }
         return listOfProducts
     }

@@ -82,7 +82,7 @@ fun AuthWnd(viewModel: TSViewModel, navController: NavHostController){
             onClick = {
                 //var id:Int=viewModel.onAuth(name,email)
                 viewModel.onAuth(name,email)
-                viewModel.setProfileData(name,email)
+                viewModel.onChangeProfileData(name,email)
                 context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
                     .edit()
                     .putBoolean("isLoggedIn", true)

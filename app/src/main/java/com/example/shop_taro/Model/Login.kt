@@ -1,5 +1,7 @@
 package com.example.shop_taro.Model
 
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 
@@ -14,5 +16,6 @@ class Login (db_: AppDatabase, remoteDB_:IRepository){
         }
         return isRegistered==1
     }
+
 
 }

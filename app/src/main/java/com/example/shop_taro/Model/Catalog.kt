@@ -26,6 +26,7 @@ class Catalog() {
     }
     private fun getAllProductsFromDB() {
         //this.listOfProducts=remoteDB.getCatalog()
+        //this.listOfProducts=remoteDB.getCatalog()
         this.listOfProducts.add(Product(1,"Taro cards", "...",
             "https://klev.club/uploads/posts/2023-10/1697623509_klev-club-p-risunki-karti-taro-ueita-17.png",10000,old_price = -1))
         this.listOfProducts.add(Product(2,"Taro circle","...",
