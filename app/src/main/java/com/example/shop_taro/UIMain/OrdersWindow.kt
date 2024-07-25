@@ -59,11 +59,11 @@ fun OrderCard(order:Order) {
                 )
                 // Статус
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = order.status.name,
-                    fontWeight = FontWeight.Medium,
-                    fontSize = 16.sp
-                )
+//                Text(
+//                    text = order.status.name,
+//                    fontWeight = FontWeight.Medium,
+//                    fontSize = 16.sp
+//                )
                 // Три изображения (placeholder)
                 Spacer(modifier = Modifier.height(8.dp))
                 Row(
@@ -72,7 +72,7 @@ fun OrderCard(order:Order) {
                 ) {
                     for (i in 0..<order.products.count()) {
                         Image(
-                            painter = rememberAsyncImagePainter(order.products[i]!!.imageResource),
+                            painter = rememberAsyncImagePainter(order.products[i]!!.ImageResource),
                             contentDescription = "Image $i",
                             modifier = Modifier.size(50.dp),
                             contentScale = ContentScale.Crop
@@ -80,11 +80,11 @@ fun OrderCard(order:Order) {
                     }
                 }
                 Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = "Сумма заказа: "+order.summa.toString()+" ₽",
-                    textAlign = TextAlign.Center,
-                    fontSize = 16.sp
-                )
+//                Text(
+//                    text = "Сумма заказа: "+order.summa.toString()+" ₽",
+//                    textAlign = TextAlign.Center,
+//                    fontSize = 16.sp
+//                )
             }
         }
     }

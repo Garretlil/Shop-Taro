@@ -77,7 +77,7 @@ class DatabaseHelper(context: Context) : IRepository, SQLiteOpenHelper(context, 
         TODO("Not yet implemented")
     }
 
-    override fun getCatalog(): MutableList<Product?> {
+    override fun getCatalog(): MutableList<Product> {
         TODO("Not yet implemented")
     }
 

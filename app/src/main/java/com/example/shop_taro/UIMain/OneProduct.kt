@@ -47,7 +47,7 @@ fun ProductItem(product: Product?, viewModel: TSViewModel, MainNavController: Na
         ) {
             Text("Title", fontSize = 16.sp,fontWeight = FontWeight.Medium, modifier = Modifier.padding(top=27.dp))
             Image(
-                painter = rememberAsyncImagePainter(product!!.imageResource),
+                painter = rememberAsyncImagePainter(product!!.ImageResource),
                 contentScale = ContentScale.Fit,
                 contentDescription = "Profile Image",
                 modifier = Modifier
@@ -56,8 +56,8 @@ fun ProductItem(product: Product?, viewModel: TSViewModel, MainNavController: Na
                     .clip(RoundedCornerShape(16.dp)) // Добавляем закругление углов
             )
             if (product != null) {
-                Text(product.name,fontSize = 25.sp,fontWeight = FontWeight.Bold, modifier = Modifier.padding(top=16.dp))
-                Text(product.price.toString()+" ₽",fontSize = 20.sp,fontWeight = FontWeight.Bold, modifier = Modifier.padding(top=8.dp))
+                Text(product.Name,fontSize = 25.sp,fontWeight = FontWeight.Bold, modifier = Modifier.padding(top=16.dp))
+                Text(product.Price.toString()+" ₽",fontSize = 20.sp,fontWeight = FontWeight.Bold, modifier = Modifier.padding(top=8.dp))
                 Text("Body text for describing why this product is simply a must-buy",fontSize = 15.sp, modifier = Modifier.padding(top=10.dp), color = Color.Gray)
             }
             Button(

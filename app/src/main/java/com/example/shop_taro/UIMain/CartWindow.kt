@@ -38,7 +38,7 @@ fun CartItemForBucket(product: Product?, viewModel: TSViewModel, NavController: 
         modifier = Modifier.padding(16.dp)
     ) {
         Image(
-            painter = rememberAsyncImagePainter(product!!.imageResource),
+            painter = rememberAsyncImagePainter(product!!.ImageResource),
             contentScale = ContentScale.Fit,
             contentDescription = "Profile Image",
             modifier = Modifier
@@ -47,13 +47,13 @@ fun CartItemForBucket(product: Product?, viewModel: TSViewModel, NavController: 
                 .clip(RoundedCornerShape(16.dp)).size(150.dp)
         )
         Spacer(modifier = Modifier.height(8.dp))
-        Text(text = product.name,
+        Text(text = product.Name,
              modifier = Modifier.clickable {
              //viewModel.updateCurrentProduct(product)
              NavController.navigate(NavRoutes.Product.route)
              }
         )
-        Text(text = product.price.toString()+" ₽")
+        Text(text = product.Price.toString()+" ₽")
     }
 }
 

@@ -38,7 +38,7 @@ fun CardItem(product: Product?, viewModel: TSViewModel, NavController: NavHostCo
             .fillMaxWidth(0.5f)
     ) {
         Image(
-            painter = rememberAsyncImagePainter(product!!.imageResource),
+            painter = rememberAsyncImagePainter(product!!.ImageResource),
             //painter = painterResource(id = product!!.imageResource),
             contentScale = ContentScale.Fit,
             contentDescription = "Profile Image",
@@ -49,10 +49,10 @@ fun CardItem(product: Product?, viewModel: TSViewModel, NavController: NavHostCo
         )
         Spacer(modifier = Modifier.height(4.dp))
         if (product != null) {
-            Text(text = product.name,modifier = Modifier.clickable {
+            Text(text = product.Name,modifier = Modifier.clickable {
                 viewModel.updateCurrentProduct(product)
                 NavController.navigate(NavRoutes.Product.route) })
-            Text(text = product.price.toString()+" ₽")
+            Text(text = product.Price.toString()+" ₽")
         }
         Button(
             onClick = {

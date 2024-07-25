@@ -12,9 +12,6 @@ import javax.inject.Inject
 data class isRegistered(
     var isRegistered:Int //количество таких пользователей
 )
-data class id_Order(
-    var id_order:Int //количество таких пользователей
-)
 
 data class Customer(
     val id: Int?=null,
@@ -31,6 +28,9 @@ data class catalogFromDB(
 data class ordersFromDB(
     var ordersList: MutableList<Order> = mutableListOf()
 )
+data class Responses(
+    var OrderID:Int
+)
 
 interface QuotesApi {
     @GET("/Customers")
@@ -45,14 +45,13 @@ interface QuotesApi {
     @GET("/Orders")//обновить
     suspend fun getOrders(@Body requestBody: Int) : Response<ordersFromDB>
 
-    @POST("/api/make_order")
-    suspend fun make_order(@Body requestBody: Order): Response<id_Order>//done
+    @POST("/orders")
+    suspend fun make_order(@Body requestBody: Order2): Response<Responses>//done
 
 }
 
 class RetrofitHelper @Inject constructor():IRepository {
-    private val baseUrl2="https://4e18-2a00-1370-8180-4cb1-5455-8c27-77b1-8252.ngrok-free.app"
-    private val baseUrl = "https://api.restful-api.dev"
+    private val baseUrl = "http://192.168.100.7:8181/"
     val quotesApi: QuotesApi = Retrofit
         .Builder()
         .baseUrl(baseUrl)
@@ -61,8 +60,9 @@ class RetrofitHelper @Inject constructor():IRepository {
         .create(QuotesApi::class.java)
     override fun make_order(order:Order): Int{
         val res:Int
+        val order2:Order2=Order2(order.products)
         runBlocking {
-            res=quotesApi.make_order(order).body()!!.id_order
+            res=quotesApi.make_order(order2).body()!!.OrderID
         }
         return res
     }
@@ -80,8 +80,8 @@ class RetrofitHelper @Inject constructor():IRepository {
         }
         return res
     }
-    override fun getCatalog(): MutableList<Product> {
-        var listOfProducts:MutableList<Product>
+    override fun getCatalog():List<Product> {
+        var listOfProducts:List<Product>
         runBlocking {
             listOfProducts = quotesApi.getCatalog().body()!!
         }

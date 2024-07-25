@@ -25,8 +25,8 @@ class TSViewModel @Inject constructor (
 
 ): AndroidViewModel(application) {
     var cart:Cart= Cart()
-    var orders:Orders=Orders(cart)
-    var catalog: Catalog = Catalog()
+    var orders:Orders=Orders(cart,remoteDB)
+    var catalog: Catalog = Catalog(remoteDB)
 
     private var login: Login = Login(dbRoom,remoteDB)
     private var auth: Auth = Auth(dbRoom,remoteDB)
@@ -45,7 +45,7 @@ class TSViewModel @Inject constructor (
     fun updateCurrentProduct(product: Product?){
         currentProduct=product
     }
-    fun addToCart(product: Product?){
+    fun addToCart(product: Product){
         orders.cart.addProductToCart(product)
     }
     fun onChangeProfileData(name:String,email:String){

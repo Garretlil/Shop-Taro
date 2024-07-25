@@ -2,13 +2,12 @@ package com.example.shop_taro.Model
 
 import android.app.Application
 import androidx.room.Room
-import com.example.shop_taro.Model.IRepository
-import com.example.shop_taro.Model.RetrofitHelper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
+
 
 
 @Module
